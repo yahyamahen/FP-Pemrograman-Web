@@ -1,3 +1,36 @@
-h1 {
-   font-size: 2em;
+body {
+   background-color: #dfdfdf;
+   .sidebar {
+      height: 45vmax;
+      background-color: white;
+      padding: 2em 1.5em 2em 2em;
+      .profile {
+         border-bottom: 1px solid #999999;
+         img {
+            align-self: center;
+            width: 5em;
+         }
+         a,
+         p {
+            align-self: center;
+         }
+      }
+
+      .menu-bar {
+         .hub-admin-btn {
+            margin-top: 15em;
+         }
+      }
+   }
+
+   .content {
+      padding: 2em 3em 2em 3em;
+      margin: 2em 2em 2em 1em;
+      background-color: white;
+      .profile-details {
+         img {
+            width: 7em;
+         }
+      }
+   }
 }

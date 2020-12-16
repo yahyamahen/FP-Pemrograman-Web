@@ -1,4 +1,38 @@
-h1 {
-   font-size: 2em;
+body {
+  background-color: #dfdfdf;
+}
+
+body .sidebar {
+  height: 45vmax;
+  background-color: white;
+  padding: 2em 1.5em 2em 2em;
+}
+
+body .sidebar .profile {
+  border-bottom: 1px solid #999999;
+}
+
+body .sidebar .profile img {
+  align-self: center;
+  width: 5em;
+}
+
+body .sidebar .profile a,
+body .sidebar .profile p {
+  align-self: center;
+}
+
+body .sidebar .menu-bar .hub-admin-btn {
+  margin-top: 15em;
+}
+
+body .content {
+  padding: 2em 3em 2em 3em;
+  margin: 2em 2em 2em 1em;
+  background-color: white;
+}
+
+body .content .profile-details img {
+  width: 7em;
 }
 /*# sourceMappingURL=style.css.map */
