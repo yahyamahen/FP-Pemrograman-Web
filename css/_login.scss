@@ -1,0 +1,30 @@
+.login-body {
+   .login-frame {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+
+      .form-login-body {
+         width: 70%;
+      }
+   }
+   background-color: white;
+   a {
+      text-decoration: none;
+   }
+
+   ul li {
+      list-style-type: none;
+   }
+
+   .hero {
+      // height: 45.2vmax;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-color: #eaeaea;
+      background-image: url("../images/login-bg.png");
+   }
+}

@@ -1,31 +1,31 @@
 /*==============================================================*/
 /* Table: MAHASISWA                                             */
 /*==============================================================*/
-create or replace table MAHASISWA 
+CREATE OR REPLACE TABLE mahasiswa 
 (
-   NPM                  char(20)       primary key     not null,
-   PASSWORD             char(25)                       null,
-   NAMA_MHS             varchar(50)                    not null,
-   EMAIL                varchar(50)                    null,
-   JURUSAN              varchar(50)                    null,
-   SEMESTER             integer                        null
+   npm                  CHAR(20)       PRIMARY KEY     NOT NULL,
+   pass             	CHAR(25)                       NULL,
+   nama_mhs             VARCHAR(50)                    NOT NULL,
+   email                VARCHAR(50)                    NULL,
+   jurusan              VARCHAR(50)                    NULL,
+   semester             INTEGER                        NULL
 );
 
 
 /*==============================================================*/
 /* Table: SURAT                                                 */
 /*==============================================================*/
-create or replace table SURAT 
+CREATE OR REPLACE TABLE surat 
 (
-   ID_SURAT             char(20)       primary key     not null,
-   NPM                  char(20)                       null,
-   NO_SURAT             char(30)                       null,
-   KATEGORI             varchar(50)                    not null,
-   JUDUL_SURAT          varchar(50)                    not null,
-   PERUSAHAAN           varchar(50)                    not null,
-   PERIHAL_LENGKAP      integer                        not null,
+   id_surat             CHAR(20)       PRIMARY KEY     NOT NULL,
+   npm                  CHAR(20)                       NULL,
+   no_surat             CHAR(30)                       NULL,
+   kategori             VARCHAR(50)                    NOT NULL,
+   judul_surat          VARCHAR(50)                    NOT NULL,
+   perusahaan           VARCHAR(50)                    NOT NULL,
+   perihal_lengkap      INTEGER                        NOT NULL
 );
 
-alter table SURAT
-      add foreign key (NPM) references MAHASISWA (NPM);
+ALTER TABLE surat
+      ADD FOREIGN KEY (npm) REFERENCES mahasiswa (npm);
 

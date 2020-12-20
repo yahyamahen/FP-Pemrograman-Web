@@ -1,3 +1,6 @@
+@import "login";
+@import "register";
+
 body {
    background-color: #dfdfdf;
    .sidebar {
@@ -18,7 +21,7 @@ body {
 
       .menu-bar {
          .hub-admin-btn {
-            margin-top: 15em;
+            margin-top: 14em;
          }
       }
    }

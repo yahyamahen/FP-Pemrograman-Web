@@ -1,3 +1,21 @@
+<?php
+session_start();
+require_once "function.php";
+
+
+if (!isset($_SESSION["login"])) {
+   header("Location: login.php");
+   exit;
+}
+
+if (isset($_SESSION['login']) && isset($_SESSION['npm'])) {
+   $npm = $_SESSION['npm'];
+}
+
+$mahasiswa = read("SELECT * FROM users WHERE npm = '$npm'");
+// $surat = read("SELECT * FROM surat WHERE npm = '$npm'");
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -15,8 +33,6 @@
    <title>SiPesan</title>
 </head>
 
-
-
 <body>
    <div class="row">
       <?php require "sidebar.php" ?>
@@ -25,29 +41,32 @@
          <div class="content">
             <h2 class="mt-1">SiPesan (Sistem Informasi Surat Pengantar Perusahaan)</h2>
             <div class="profile-details d-flex mt-4">
-               <img class="rounded-circle d-inline-block mb-3" src=" images/profile.jpg" alt="gambar">
-               <table cellspacing="0px" cellpadding="1px" border="0px" class="ml-4">
-                  <tr>
-                     <td class="pr-5">Nama Mahasiswa</td>
-                     <td align="center">:</td>
-                     <td class="pl-2">Rizqi Yahya Mahendra</td>
-                  </tr>
-                  <tr>
-                     <td class="pr-5">NPM</td>
-                     <td align="center">:</td>
-                     <td class="pl-2">18081010014</td>
-                  </tr>
-                  <tr>
-                     <td class="pr-5">Jurusan</td>
-                     <td align="center">:</td>
-                     <td class="pl-2">Teknik Informatika</td>
-                  </tr>
-                  <tr>
-                     <td class="pr-5">Semester</td>
-                     <td align="center">:</td>
-                     <td class="pl-2">5</td>
-                  </tr>
-               </table>
+               <?php foreach ($mahasiswa as $mhs) : ?>
+                  <img class="rounded-circle d-inline-block mb-3" src=" images/<?= $mhs['npm']; ?>/<?= $mhs['foto_profile']; ?>" alt="profile">
+                  <table cellspacing="0px" cellpadding="1px" border="0px" class="ml-4">
+                     <tr>
+                        <td class="pr-5">Nama Mahasiswa</td>
+                        <td align="center">:</td>
+                        <td class="pl-2"><?= $mhs['npm']; ?></td>
+                     </tr>
+
+                     <tr>
+                        <td class="pr-5">NPM</td>
+                        <td align="center">:</td>
+                        <td class="pl-2"><?= $mhs['nama_mhs'] ?></td>
+                     </tr>
+                     <tr>
+                        <td class="pr-5">Jurusan</td>
+                        <td align="center">:</td>
+                        <td class="pl-2"><?= $mhs['jurusan'] ?></td>
+                     </tr>
+                     <tr>
+                        <td class="pr-5">Semester</td>
+                        <td align="center">:</td>
+                        <td class="pl-2"><?= $mhs['semester'] ?></td>
+                     </tr>
+                  </table>
+               <?php endforeach; ?>
             </div>
 
             <div class="row mt-3">

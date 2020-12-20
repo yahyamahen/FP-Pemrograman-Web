@@ -1,3 +1,18 @@
+<?php
+session_start();
+require "function.php";
+
+if (!isset($_SESSION["login"])) {
+   echo "<script>
+         alert('Login terlebih dahulu');
+   </script>";
+   header("Location: login.php");
+   exit;
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 

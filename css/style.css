@@ -1,3 +1,73 @@
+.login-body {
+  background-color: white;
+}
+
+.login-body .login-frame {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.login-body .login-frame .form-login-body {
+  width: 70%;
+}
+
+.login-body a {
+  text-decoration: none;
+}
+
+.login-body ul li {
+  list-style-type: none;
+}
+
+.login-body .hero {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #eaeaea;
+  background-image: url("../images/login-bg.png");
+}
+
+.register-body {
+  background-color: white;
+}
+
+.register-body .register-frame {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.register-body .register-frame .form-register-body {
+  width: 70%;
+}
+
+.register-body a {
+  text-decoration: none;
+}
+
+.register-body ul li {
+  list-style-type: none;
+}
+
+.register-body .hero {
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../images/register-bg.png");
+}
+
+.register-body .hero .header-title {
+  padding-top: 3em;
+  padding-left: 5em;
+  color: white;
+  text-shadow: 2px 2px 10px #444444;
+}
+
 body {
   background-color: #dfdfdf;
 }
@@ -23,7 +93,7 @@ body .sidebar .profile p {
 }
 
 body .sidebar .menu-bar .hub-admin-btn {
-  margin-top: 15em;
+  margin-top: 14em;
 }
 
 body .content {
