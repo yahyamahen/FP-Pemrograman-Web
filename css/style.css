@@ -68,6 +68,40 @@
   text-shadow: 2px 2px 10px #444444;
 }
 
+body .akun-body {
+  background-color: white;
+  margin: 2em 2em 2em 1em;
+  padding-bottom: 2em;
+}
+
+body .profile-details img {
+  width: 8em;
+}
+
+body .modal .modal-title {
+  margin-left: 7.6em;
+}
+
+body .modal form {
+  padding: 0em 1.5em 0em 1.5em;
+}
+
+body .modal form input {
+  margin-bottom: 0.5em;
+}
+
+body .modal form input [type="file"] {
+  margin-top: 0.3em;
+}
+
+body .modal form img {
+  margin-right: 0.7em;
+}
+
+body .modal form .profile-photo {
+  width: 2.5em;
+}
+
 body {
   background-color: #dfdfdf;
 }
@@ -104,5 +138,13 @@ body .content {
 
 body .content .profile-details img {
   width: 7em;
+}
+
+body .content .table-surat table th {
+  text-align: center;
+}
+
+body .modal .modal-title {
+  margin-left: 16.5em;
 }
 /*# sourceMappingURL=style.css.map */

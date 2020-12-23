@@ -7,16 +7,17 @@ function mahasiswaCreated()
    if (isset($_POST["regist"])) {
       if (registration($_POST) == 1) {
          echo
-            '<div class="form-group col-md-12">
-               <p class="text-center" style="color: black; font-style: italic;">Data Mahasiswa Ditambahkan</p>
+            '<div class="form-group col-md-12 mt-4">
+               <p class="text-center" style="color: aqua; font-style: italic;">Data Mahasiswa Ditambahkan</p>
             </div>"';
          echo
             "<script>
-				alert('Data Mahasiswa Ditambahkan');
+            alert('Data Mahasiswa Ditambahkan');
+            document.location.href='login.php';
          </script>";
-         header('Location  : login.php');
+         // header('Location: login.php');
       } else {
-         echo "<script> alert('Error :  " . mysqli_error($conn) . "'</script>;";
+         echo "<script> alert('Error :  " . mysqli_error($conn) . "'</script>";
       }
    }
 }
@@ -90,11 +91,11 @@ function mahasiswaCreated()
                   <button type="submit" class="mt-4 form-control btn btn-primary" name="regist">DAFTAR</button>
                   <?php mahasiswaCreated(); ?>
                </div>
-               <div class="col-12">
-                  <li class="list-group text-center mt-2"><a href="login.php">LOGIN</a></li>
-                  <p class="text-center">NPM sudah digunakan? <a href="#">Hubungi Admin</a></p>
-               </div>
             </form>
+            <div class="col-12">
+               <li class="list-group text-center mt-2"><a href="login.php">LOGIN</a></li>
+               <p class="text-center">NPM sudah digunakan? <a href="#">Hubungi Admin</a></p>
+            </div>
          </div>
       </div>
 

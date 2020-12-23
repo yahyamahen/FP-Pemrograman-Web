@@ -1,5 +1,7 @@
 @import "login";
 @import "register";
+@import "akun";
+@import "surat";
 
 body {
    background-color: #dfdfdf;
@@ -34,6 +36,20 @@ body {
          img {
             width: 7em;
          }
+      }
+
+      .table-surat {
+         table {
+            th {
+               text-align: center;
+            }
+         }
+      }
+   }
+
+   .modal {
+      .modal-title {
+         margin-left: 16.5em;
       }
    }
 }

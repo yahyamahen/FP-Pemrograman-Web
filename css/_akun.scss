@@ -1,0 +1,39 @@
+body {
+   .akun-body {
+      background-color: white;
+      margin: 2em 2em 2em 1em;
+      padding-bottom: 2em;
+   }
+
+   .profile-details {
+      img {
+         width: 8em;
+      }
+   }
+
+   .modal {
+      .modal-title {
+         margin-left: 7.6em;
+      }
+
+      form {
+         padding: 0em 1.5em 0em 1.5em;
+
+         input {
+            margin-bottom: 0.5em;
+         }
+
+         input [type="file"] {
+            margin-top: 0.3em;
+         }
+
+         img {
+            margin-right: 0.7em;
+         }
+
+         .profile-photo {
+            width: 2.5em;
+         }
+      }
+   }
+}

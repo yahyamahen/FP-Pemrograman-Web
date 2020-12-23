@@ -1,7 +1,7 @@
 <div class="col-md-2 sidebar">
    <?php foreach ($mahasiswa as $mhs) : ?>
       <div class="profile d-flex flex-column">
-         <img class="rounded-circle d-inline-block  mb-3" src="images<?= $mhs['npm'] ?>/<?= $mhs['foto_profile'] ?>" alt="profile">
+         <img class="rounded-circle d-inline-block  mb-3" src="images/<?= $mhs['npm'] ?>/<?= $mhs['foto_profil'] ?>" alt="profile">
          <a class="card-link" href="akun.php"><?= $mhs['nama_mhs'] ?></a>
          <!-- <p><?= $mhs['posisi'] ?></p> -->
          <p>mahasiswa</p>

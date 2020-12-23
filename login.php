@@ -6,7 +6,7 @@ if (isset($_COOKIE['id']) && isset($_COOKIE['key'])) {
    $id = $_COOKIE['id'];
    $key = $_COOKIE['key'];
 
-   $query = "SELECT npm FROM users WHERE nama_mhs = '$id';";
+   $query = "SELECT npm FROM mahasiswa WHERE nama_mhs = '$id';";
    $result = mysqli_query($conn, $query);
    $row = mysqli_fetch_assoc($result);
 
@@ -25,12 +25,17 @@ if (isset($_POST['login'])) {
    $npm = $_POST['npm'];
    $password = $_POST['password'];
 
-   $result = mysqli_query($conn, "SELECT * FROM users WHERE npm = '$npm';");
+   $result = mysqli_query($conn, "SELECT * FROM mahasiswa WHERE npm = '$npm';");
 
    // cek username
    if (mysqli_num_rows($result) === 1) {
       //cek password
       $row = mysqli_fetch_assoc($result);
+
+      echo "<br>" . $password;
+      echo "<br>";
+      var_dump($row);
+
       if (password_verify($password, $row['pass'])) {
          // set session
          $_SESSION['login'] = true;
