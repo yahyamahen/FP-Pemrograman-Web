@@ -13,9 +13,9 @@ function mahasiswaCreated()
          echo
             "<script>
             alert('Data Mahasiswa Ditambahkan');
-            document.location.href='login.php';
+            document.location.href='login';
          </script>";
-         // header('Location: login.php');
+         // header('Location: login');
       } else {
          echo "<script> alert('Error :  " . mysqli_error($conn) . "'</script>";
       }
@@ -93,7 +93,7 @@ function mahasiswaCreated()
                </div>
             </form>
             <div class="col-12">
-               <li class="list-group text-center mt-2"><a href="login.php">LOGIN</a></li>
+               <li class="list-group text-center mt-2"><a href="login">LOGIN</a></li>
                <p class="text-center">NPM sudah digunakan? <a href="#">Hubungi Admin</a></p>
             </div>
          </div>

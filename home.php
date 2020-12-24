@@ -4,7 +4,7 @@ require_once "function.php";
 require_once "model.php";
 
 if (!isset($_SESSION["login"])) {
-   header("Location: login.php");
+   header("Location: login");
    exit;
 }
 
@@ -38,7 +38,7 @@ function suratNotice()
          echo
             "<script>
             alert('Surat Berhasil Ditambahkan');
-            document.location.href = 'index.php';
+            document.location.href = 'home';
          </script>";
       } else {
          echo "<script> alert('Error :  " . mysqli_error($conn) . "'</script>;";
@@ -51,7 +51,7 @@ function suratNotice()
          echo
             "<script>
                alert('Surat Berhasil Diupdate');
-               document.location.href = 'index.php';
+               document.location.href = 'home';
             </script>";
       } else {
          echo "<script> alert('Error :  " . mysqli_error($conn) . "'</script>;";
@@ -67,7 +67,7 @@ if (isset($_GET["delete"])) {
       echo
          "<script>
             alert('Surat Berhasil Dihapus');
-            document.location.href='index.php';
+            document.location.href='home';
          </script>";
    } else {
       echo
@@ -98,7 +98,7 @@ if (isset($_GET["delete"])) {
 
 <body>
    <div class="row">
-      <?php require "sidebar.php" ?>
+      <?php require_once "sidebar.php" ?>
 
       <div class="col-md-10">
          <div class="content">
@@ -136,10 +136,10 @@ if (isset($_GET["delete"])) {
                   <button type="button" class="btn btn-info tombolTambahData" data-toggle="modal" data-target="#formModal-input">Buat Surat</button>
                </div>
                <div class="col-md-4 d-flex">
-                  <a class="card-link" href="index.php" class=" d-inline" for=""> <strong>Kategori</strong> </a>
+                  <a class="card-link" href="home" class=" d-inline" for=""> <strong>Kategori</strong> </a>
                   <ul class="">
                      <?php foreach ($kategori as $data) : ?>
-                        <li class="d-inline mr-4"><a class=" card-link" href="index.php?kategori=<?= $data['kategori']; ?>"><?= $data['kategori'] ?></a></li>
+                        <li class="d-inline mr-4"><a class=" card-link" href="home?kategori=<?= $data['kategori']; ?>"><?= $data['kategori'] ?></a></li>
                      <?php endforeach; ?>
                   </ul>
                </div>
@@ -174,9 +174,9 @@ if (isset($_GET["delete"])) {
                               <td align="center"><?= $data['kategori'] ?></td>
                               <td align="center"><?= $data['perusahaan'] ?></td>
                               <td class=" text-center">
-                                 <a class="badge badge-pill badge-primary ml-1" href="surat.php?id=<?= $data['id'] ?>">Detail</a>
-                                 <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="index.php?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
-                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="index.php?delete=<?= $data['id'] ?>">Hapus</a>
+                                 <a class="badge badge-pill badge-primary ml-1" href="surat?id=<?= $data['id'] ?>">Detail</a>
+                                 <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="home?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
+                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>">Hapus</a>
                               </td>
                            </tr>
                         <?php $i++;
@@ -190,9 +190,9 @@ if (isset($_GET["delete"])) {
                               <td align="center"><?= $data['kategori'] ?></td>
                               <td width="15%" align="center"><?= $data['perusahaan'] ?></td>
                               <td class=" text-center">
-                                 <a class="badge badge-pill badge-primary ml-1" href="surat.php?id=<?= $data['id'] ?>">Detail</a>
-                                 <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="index.php?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
-                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="index.php?delete=<?= $data['id'] ?>">Hapus</a>
+                                 <a class="badge badge-pill badge-primary ml-1" href="surat?id=<?= $data['id'] ?>">Detail</a>
+                                 <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="home?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
+                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>">Hapus</a>
                               </td>
                            </tr>
                         <?php $i++;
@@ -205,7 +205,7 @@ if (isset($_GET["delete"])) {
       </div>
 
       <!-- Modal -->
-      <div class="modal fade" id="formModal-input" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+      <div class="modal fade" id="formModal-input" tabhome="-1" aria-labelledby="judulModal" aria-hidden="true">
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">

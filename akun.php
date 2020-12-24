@@ -16,7 +16,7 @@ function mahasiswaUpdated()
          echo
             "<script>
             alert('Data Mahasiswa Terupdate');
-            document.location.href= 'akun.php';
+            document.location.href= 'akun';
          </script>";
       } else {
          echo "<script> alert('Error :  " . mysqli_error($conn) . "'</script>;";
@@ -48,7 +48,7 @@ function mahasiswaUpdated()
 <body>
 
    <div class="row">
-      <?php require "sidebar.php" ?>
+      <?php require_once "sidebar.php" ?>
 
       <div class="col-md-10">
          <div class="row akun-body">

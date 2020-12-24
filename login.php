@@ -17,7 +17,7 @@ if (isset($_COOKIE['id']) && isset($_COOKIE['key'])) {
 }
 
 if (isset($_SESSION['login'])) {
-   header('Location: index.php');
+   header('Location: home');
    exit;
 }
 
@@ -46,7 +46,7 @@ if (isset($_POST['login'])) {
             setcookie('key', hash('sha256', $row['npm']), time() + 60);
          }
 
-         header("Location: index.php");
+         header("Location: home");
          exit;
       }
    }
@@ -109,7 +109,7 @@ if (isset($_POST['login'])) {
                   </div>
                <?php endif; ?>
             </form>
-            <div class="text-center mb-2 col-md-12"><a href="register.php">Register Akun</a></div>
+            <div class="text-center mb-2 col-md-12"><a href="register">Register Akun</a></div>
             <div class="text-center col-md-12">Lupa Password? <a href="#">Hubungi Admin</a></div>
          </div>
       </div>
