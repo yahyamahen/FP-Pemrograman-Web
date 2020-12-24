@@ -117,7 +117,7 @@ function mahasiswaUpdated()
                         <input type="hidden" name="foto_profil_lama" id="foto_profil_lama" value="<?= $mhs['foto_profil'] ?>">
                         <div class="col-md-12">
                            <label for="npm" class="form-label">NPM</label>
-                           <input type="hidden" class="form-control" id="npm" name="npm" placeholder="NPM" value="<?= $mhs['npm']; ?>">
+                           <input type="text" class="form-control" id="npm" name="npm" placeholder="NPM" value="<?= $mhs['npm']; ?>" disabled>
                         </div>
                         <div class="col-12">
                            <label for="nama_mhs" class="form-label">Nama Lengkap</label>
@@ -126,7 +126,7 @@ function mahasiswaUpdated()
                         <div class="col-md-9">
                            <label for="jurusan" class="form-label">Jurusan</label>
                            <select id="jurusan" name="jurusan" class="form-control">
-                              <option selected value="Teknik Infromatika" selected>Teknik Informatika</option>
+                              <option value="Teknik Infromatika" selected>Teknik Informatika</option>
                               <option value="Sistem Informasi">Sistem Informasi</option>
                            </select>
                         </div>

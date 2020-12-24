@@ -8,7 +8,27 @@ if (!isset($_SESSION["login"])) {
    exit;
 }
 
+$kategori = read("SELECT kategori FROM surat LIMIT 2;");
 $surat = read("SELECT * FROM surat WHERE npm = '$npm'");
+
+if (!isset($_GET['kategori']) && isset($_POST['search_btn'])) {
+   $key = $_POST['keyword'];
+   $surat = read("SELECT * FROM surat WHERE kategori LIKE '%$key%' OR 
+   judul_surat LIKE '%$key%' OR
+   perusahaan LIKE '%$key%';");
+}
+
+if (isset($_GET['kategori'])) {
+   $ktg = $_GET['kategori'];
+   $surat_filter = read("SELECT * FROM surat WHERE kategori = '$ktg';");
+   if (isset($_POST['search_btn'])) {
+      $key = $_POST['keyword'];
+      $surat_filter = read("SELECT * FROM surat WHERE kategori = '$ktg' && 
+		judul_surat LIKE '%$key%' OR
+		perusahaan LIKE '%$key%';");
+   }
+}
+
 
 function suratNotice()
 {
@@ -112,18 +132,24 @@ if (isset($_GET["delete"])) {
             </div>
 
             <div class="row mt-3 table-surat">
-               <div class="col-md-6">
+               <div class="col-md-4">
                   <button type="button" class="btn btn-info tombolTambahData" data-toggle="modal" data-target="#formModal-input">Buat Surat</button>
                </div>
-               <div class="col-lg-6">
-                  <form action="#" method="post">
+               <div class="col-md-4 d-flex">
+                  <a class="card-link" href="index.php" class=" d-inline" for=""> <strong>Kategori</strong> </a>
+                  <ul class="">
+                     <?php foreach ($kategori as $data) : ?>
+                        <li class="d-inline mr-4"><a class=" card-link" href="index.php?kategori=<?= $data['kategori']; ?>"><?= $data['kategori'] ?></a></li>
+                     <?php endforeach; ?>
+                  </ul>
+               </div>
+               <div class="col-lg-4">
+                  <form action="" method="post">
                      <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Cari File Surat.." name="keyword" id="keyword" autocomplete="off">
-
+                        <input type="text" class="form-control" placeholder="Cari Surat..." name="keyword" id="keyword" autocomplete="off">
                         <div class="input-group-append">
-                           <button class="btn btn-outline-info" type="submit" id="tombolCari">Cari</button>
+                           <button class="btn btn-outline-info" type="submit" id="search_btn" name="search_btn">Cari</button>
                         </div>
-
                      </div>
                   </form>
                </div>
@@ -134,24 +160,44 @@ if (isset($_GET["delete"])) {
                         <th>No</th>
                         <th>File Surat</th>
                         <th>Kategori</th>
+                        <th>Perusahaan</th>
                         <th>Kegiatan</th>
                      </tr>
                   </thead>
                   <tbody>
-                     <?php $i = 1;
-                     foreach ($surat as $data) : ?>
-                        <tr>
-                           <th><?= $i; ?></th>
-                           <td><?= $data['judul_surat'] ?></td>
-                           <td align="center"><?= $data['kategori'] ?></td>
-                           <td class=" text-center">
-                              <a class="badge badge-pill badge-primary ml-1" href="surat.php?id=<?= $data['id'] ?>">Detail</a>
-                              <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="index.php?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
-                              <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="index.php?delete=<?= $data['id'] ?>">Hapus</a>
-                           </td>
-                        </tr>
-                     <?php $i++;
-                     endforeach; ?>
+                     <?php if (isset($_GET['kategori'])) : ?>
+                        <?php $i = 1;
+                        foreach ($surat_filter as $data) : ?>
+                           <tr>
+                              <th><?= $i; ?></th>
+                              <td><?= $data['judul_surat'] ?></td>
+                              <td align="center"><?= $data['kategori'] ?></td>
+                              <td align="center"><?= $data['perusahaan'] ?></td>
+                              <td class=" text-center">
+                                 <a class="badge badge-pill badge-primary ml-1" href="surat.php?id=<?= $data['id'] ?>">Detail</a>
+                                 <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="index.php?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
+                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="index.php?delete=<?= $data['id'] ?>">Hapus</a>
+                              </td>
+                           </tr>
+                        <?php $i++;
+                        endforeach; ?>
+                     <?php else : ?>
+                        <?php $i = 1;
+                        foreach ($surat as $data) : ?>
+                           <tr>
+                              <th><?= $i; ?></th>
+                              <td><?= $data['judul_surat'] ?></td>
+                              <td align="center"><?= $data['kategori'] ?></td>
+                              <td width="15%" align="center"><?= $data['perusahaan'] ?></td>
+                              <td class=" text-center">
+                                 <a class="badge badge-pill badge-primary ml-1" href="surat.php?id=<?= $data['id'] ?>">Detail</a>
+                                 <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="index.php?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
+                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="index.php?delete=<?= $data['id'] ?>">Hapus</a>
+                              </td>
+                           </tr>
+                        <?php $i++;
+                        endforeach; ?>
+                     <?php endif; ?>
                   </tbody>
                </table>
             </div>
@@ -175,24 +221,24 @@ if (isset($_GET["delete"])) {
                      <div class="form-group">
                         <label for="kategori">Kategori</label>
                         <select class="form-control" id="kategori" name="kategori">
-                           <option class="form-control" value="Studi">Studi</option>
+                           <option value="Studi" selected>Studi</option>
                            <option value="Magang">Magang</option>
                         </select>
                      </div>
 
                      <div class="form-group">
                         <label for="judul_surat">Judul Surat</label>
-                        <input type="text" class="form-control" id="judul_surat" name="judul_surat">
+                        <input type="text" class="form-control" id="judul_surat" name="judul_surat" placeholder="Judul Surat">
                      </div>
 
                      <div class="form-group">
                         <label for="perusahaan">Perusahaan</label>
-                        <input type="text" class="form-control" id="perusahaan" name="perusahaan">
+                        <input type="text" class="form-control" id="perusahaan" name="perusahaan" placeholder="perusahaan">
                      </div>
 
                      <div class="form-group">
                         <label for="perihal_lengkap">Perihal</label>
-                        <textarea rows="4" class="form-control" id="perihal_lengkap" name="perihal_lengkap"></textarea>
+                        <textarea rows="4" class="form-control" id="perihal_lengkap" name="perihal_lengkap" placeholder="Perihal Lengkap"></textarea>
                         <p style="font-size: 0.9em;">Contoh : <br>
                            Menyatakan bahwa mahasiswa dengan data yang terlampir memohon untuk melakukan Praktik Kerja Lapangan pada pada perusahaan PT.DEF Kedelai mulai tanggal 15 Juli 2020 - 19 Desember 2020</p>
                      </div>

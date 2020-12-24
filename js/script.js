@@ -3,7 +3,7 @@ $(function () {
       $('#judulModal').html('Buat Surat');
       $('.modal-footer button[type=submit]').html('Buat Surat');
       $('.modal-footer button[type=submit]').addClass('btn btn-primary');
-      $('#kategori').val('');
+      // $('#kategori').val('');
       $('#judul_surat').val('');
       $('#perusahaan').val('');
       $('#perihal_lengkap').val('');     

@@ -73,6 +73,15 @@ function registration($data)
    return mysqli_affected_rows($conn);
 }
 
+function search($key, $ktg)
+{
+   $query = "SELECT * FROM surat WHERE kategori = '$ktg' && 
+		judul_surat LIKE '%$key%' OR
+		perusahaan key '%$key%';";
+
+   return read($query);
+}
+
 function inputSurat($data)
 {
    global $conn;
