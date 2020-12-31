@@ -32,8 +32,8 @@ function mahasiswaCreated()
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
    <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="css/bootstrap.css">
-   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+   <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
    <link rel="stylesheet" href="css/style.css">
    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
 
@@ -102,13 +102,13 @@ function mahasiswaCreated()
 
    </div>
 
-   <script src="js/jquery-3.5.1.js"></script>
-   <script src="js/jquery-3.5.1.min.js"></script>
-   <script src="js/bootstrap.js"></script>
-   <script src="js/bootstrap.min.js"></script>
-   <!-- <script src="bootstrap.bundle.js"></script> -->
-   <!-- <script src="bootstrap.bundle.min.js"></script> -->
-   <script src="js/font-awesome.min.js"></script>
+   <script src="js/js/jquery-3.5.1.js"></script>
+   <script src="js/js/jquery-3.5.1.min.js"></script>
+   <script src="js/js/bootstrap.js"></script>
+   <script src="js/js/bootstrap.min.js"></script>
+   <!-- <script src="js/js/bootstrap.bundle.js"></script> -->
+   <!-- <script src="js/js/bootstrap.bundle.min.js"></script> -->
+   <script src="js/js/font-awesome.min.js"></script>
 
    <!-- Optional JavaScript; choose one of the two! -->
 

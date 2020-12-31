@@ -1,8 +1,10 @@
 <div class="col-md-2 sidebar">
    <?php foreach ($mahasiswa as $mhs) : ?>
       <div class="profile d-flex flex-column">
-         <img class="rounded-circle d-inline-block  mb-3" src="images/<?= $mhs['npm'] ?>/<?= $mhs['foto_profil'] ?>" alt="profile">
-         <a class="card-link" href="akun"><?= $mhs['nama_mhs'] ?></a>
+         <div class="d-flex justify-content-center overflow-hidden align-self-center" style="width: 6em; height:6em; border-radius:400em;">
+            <img class="d-inline-block" style="width:6em;" src="images/<?= $mhs['npm'] ?>/<?= $mhs['foto_profil'] ?>" alt="profile">
+         </div>
+         <a class="card-link mt-3" href="akun"><?= $mhs['nama_mhs'] ?></a>
          <!-- <p><?= $mhs['posisi'] ?></p> -->
          <p>mahasiswa</p>
       </div>

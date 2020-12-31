@@ -3,32 +3,28 @@ session_start();
 require_once "function.php";
 require_once "model.php";
 
-if (!isset($_SESSION["login"])) {
-   header("Location: login");
-   exit;
-}
-
 $kategori = read("SELECT kategori FROM surat LIMIT 2;");
 $surat = read("SELECT * FROM surat WHERE npm = '$npm'");
 
-if (!isset($_GET['kategori']) && isset($_POST['search_btn'])) {
+if (isset($_POST['search_btn'])) {
    $key = $_POST['keyword'];
-   $surat = read("SELECT * FROM surat WHERE kategori LIKE '%$key%' OR 
+   $surat = read("SELECT * FROM surat WHERE 
+   (kategori LIKE '%$key%' OR 
    judul_surat LIKE '%$key%' OR
-   perusahaan LIKE '%$key%';");
+   perusahaan LIKE '%$key%') && npm = '$npm';");
 }
 
 if (isset($_GET['kategori'])) {
    $ktg = $_GET['kategori'];
-   $surat_filter = read("SELECT * FROM surat WHERE kategori = '$ktg';");
+   $surat_filter = read("SELECT * FROM surat WHERE npm = '$npm' && kategori = '$ktg' ;");
    if (isset($_POST['search_btn'])) {
       $key = $_POST['keyword'];
       $surat_filter = read("SELECT * FROM surat WHERE kategori = '$ktg' && 
-		judul_surat LIKE '%$key%' OR
-		perusahaan LIKE '%$key%';");
+		(judul_surat LIKE '%$key%' OR
+		perusahaan LIKE '%$key%') AND npm = '$npm';");
+      echo $npm;
    }
 }
-
 
 function suratNotice()
 {
@@ -76,7 +72,6 @@ if (isset($_GET["delete"])) {
          </sciprt>";
    }
 }
-
 ?>
 
 <!doctype html>
@@ -88,8 +83,8 @@ if (isset($_GET["delete"])) {
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
    <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="css/bootstrap.css">
-   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+   <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
    <link rel="stylesheet" href="css/style.css">
    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
 
@@ -105,8 +100,10 @@ if (isset($_GET["delete"])) {
             <h2 class="mt-1">SiPesan (Sistem Informasi Surat Pengantar Perusahaan)</h2>
             <div class="profile-details d-flex mt-4">
                <?php foreach ($mahasiswa as $mhs) : ?>
-                  <img class="rounded-circle d-inline-block mb-3" src=" images/<?= $mhs['npm']; ?>/<?= $mhs['foto_profil']; ?>" alt="profile">
-                  <table cellspacing="0px" cellpadding="1px" border="0px" class="ml-4">
+                  <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 8em; height:8em; border-radius:400em;">
+                     <img class="d-inline-block align-self-center" style="width:8em;" src="images/<?= $mhs['npm'] ?>/<?= $mhs['foto_profil'] ?>" alt="profile">
+                  </div>
+                  <table cellspacing="0px" cellpadding="1px" border="0px" class="ml-4 mt-2">
                      <tr>
                         <td class="pr-5">Nama Mahasiswa</td>
                         <td align="center">:</td>
@@ -173,7 +170,7 @@ if (isset($_GET["delete"])) {
                               <td><?= $data['judul_surat'] ?></td>
                               <td align="center"><?= $data['kategori'] ?></td>
                               <td align="center"><?= $data['perusahaan'] ?></td>
-                              <td class=" text-center">
+                              <td width="20%" class=" text-center">
                                  <a class="badge badge-pill badge-primary ml-1" href="surat?id=<?= $data['id'] ?>">Detail</a>
                                  <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="home?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
                                  <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>">Hapus</a>
@@ -255,13 +252,13 @@ if (isset($_GET["delete"])) {
    </div>
    <?php suratNotice() ?>
 
-   <script src="js/jquery-3.5.1.js"></script>
-   <script src="js/jquery-3.5.1.min.js"></script>
-   <script src="js/bootstrap.js"></script>
-   <script src="js/bootstrap.min.js"></script>
-   <!-- <script src="bootstrap.bundle.js"></script> -->
-   <!-- <script src="bootstrap.bundle.min.js"></script> -->
-   <script src="js/font-awesome.min.js"></script>
+   <script src="js/js/jquery-3.5.1.js"></script>
+   <script src="js/js/jquery-3.5.1.min.js"></script>
+   <script src="js/js/bootstrap.js"></script>
+   <script src="js/js/bootstrap.min.js"></script>
+   <!-- <script src="js/js/bootstrap.bundle.js"></script> -->
+   <!-- <script src="js/js/bootstrap.bundle.min.js"></script> -->
+   <script src="js/js/font-awesome.min.js"></script>
 
    <!-- Optional JavaScript; choose one of the two! -->
 
@@ -276,6 +273,40 @@ if (isset($_GET["delete"])) {
    <!-- <script src="https//cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script> -->
 
    <script src="js/script.js"></script>
+   <script>
+      $(function() {
+         $('.tombolTambahData').on('click', function() {
+            $('#judulModal').html('Buat Surat');
+            $('.modal-footer button[type=submit]').html('Buat Surat');
+            $('.modal-footer button[type=submit]').addClass('btn btn-primary');
+            // $('#kategori').val('');
+            $('#judul_surat').val('');
+            $('#perusahaan').val('');
+            $('#perihal_lengkap').val('');
+         });
+
+         $('.tampilModalUbah').on('click', function() {
+            $('#judulModal').html('Ubah Surat');
+            $('.modal-footer button[type=submit]').addClass('btn btn-success');
+            $('.modal-footer button[type=submit]').html('Ubah Surat');
+            $('.modal-footer button[type=submit]').attr('name', 'update');
+
+            let id = $(this).data('id');
+            let npm = $(this).data('npm');
+            let judul_surat = $(this).data('judul_surat');
+            let kategori = $(this).data('kategori');
+            let perusahaan = $(this).data('perusahaan');
+            let perihal_lengkap = $(this).data('perihal_lengkap');
+
+            $('.modal-body #id').val(id);
+            $('.modal-body #npm').val(npm);
+            $('.modal-body #judul_surat').val(judul_surat);
+            $('.modal-body #kategori').val(kategori);
+            $('.modal-body #perusahaan').val(perusahaan);
+            $('.modal-body #perihal_lengkap').val(perihal_lengkap);
+         });
+      });
+   </script>
 </body>
 
 </html>

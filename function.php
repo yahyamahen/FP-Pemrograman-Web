@@ -180,7 +180,6 @@ function update($data)
 
    $nama_mhs = htmlspecialchars($data['nama_mhs']);
    $jurusan = htmlspecialchars($data['jurusan']);
-   // $npm = strtolower(stripcslashes(htmlspecialchars($data['npm'])));
    // $password = mysqli_real_escape_string($conn, htmlspecialchars($data['password']));
    // $password2 = mysqli_real_escape_string($conn, htmlspecialchars($data['password2']));
    $semester = htmlspecialchars($data['semester']);
@@ -196,6 +195,8 @@ function update($data)
    $query = "UPDATE mahasiswa SET nama_mhs = '$nama_mhs', jurusan = '$jurusan', semester = '$semester', email = '$email', foto_profil = '$foto_profil' WHERE npm = '$npm';";
 
    mysqli_query($conn, $query);
+   echo mysqli_error($conn);
+   echo "<br>" . mysqli_affected_rows($conn);
    return mysqli_affected_rows($conn);
 }
 
@@ -243,5 +244,6 @@ function upload()
       move_uploaded_file($tmpName, 'images/' . $_POST['npm'] . "/" . $namaFileBaru);
    }
 
+   echo $path . "/" . $namaFileBaru;
    return $namaFileBaru;
 }
