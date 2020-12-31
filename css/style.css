@@ -74,10 +74,6 @@ body .akun-body {
   padding-bottom: 2em;
 }
 
-body .profile-details img {
-  width: 8em;
-}
-
 body .modal .modal-title {
   margin-left: 7.6em;
 }
@@ -100,6 +96,11 @@ body .modal form img {
 
 body .modal form .profile-photo {
   width: 2.5em;
+}
+
+body .detail-surat-section {
+  margin: 1em;
+  padding: 1.5em 0.5em 0.5em 0.5em;
 }
 
 body {

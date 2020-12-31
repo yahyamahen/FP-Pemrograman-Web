@@ -167,7 +167,7 @@ if (isset($_GET["delete"])) {
                         foreach ($surat_filter as $data) : ?>
                            <tr>
                               <th><?= $i; ?></th>
-                              <td><?= $data['judul_surat'] ?></td>
+                              <td><a class="card-link" style="font-weight: 500;" href="surat?id=<?= $data['id'] ?>"><?= $data['judul_surat'] ?></a></td>
                               <td align="center"><?= $data['kategori'] ?></td>
                               <td align="center"><?= $data['perusahaan'] ?></td>
                               <td width="20%" class=" text-center">
@@ -183,7 +183,7 @@ if (isset($_GET["delete"])) {
                         foreach ($surat as $data) : ?>
                            <tr>
                               <th><?= $i; ?></th>
-                              <td><?= $data['judul_surat'] ?></td>
+                              <td><a class="card-link" style="font-weight: 500;" href="surat?id=<?= $data['id'] ?>"><?= $data['judul_surat'] ?></a></td>
                               <td align="center"><?= $data['kategori'] ?></td>
                               <td width="15%" align="center"><?= $data['perusahaan'] ?></td>
                               <td class=" text-center">
