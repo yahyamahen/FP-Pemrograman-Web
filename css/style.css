@@ -103,6 +103,43 @@ body .detail-surat-section {
   padding: 1.5em 0.5em 0.5em 0.5em;
 }
 
+body .content-surat {
+  background-color: white;
+  padding: 2em 3em 2em 3em;
+  margin: 2em 2em 2em 1em;
+  width: 25cm;
+  height: 33.7cm;
+}
+
+body .content-surat .kop-header p {
+  margin-bottom: 0.1em;
+}
+
+body .content-surat .body-surat {
+  padding: 0em 3em 0em 3em;
+}
+
+body .content-surat .body-surat .tujuan-surat p {
+  font-size: 1.2em;
+  margin-bottom: 0em;
+}
+
+body .content-surat .body-surat .isi-surat {
+  font-size: 1.2em;
+}
+
+@media print {
+  body .detail-surat-section,
+  body .col-md-2 {
+    display: none;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 0mm;
+}
+
 body {
   background-color: #dfdfdf;
 }
@@ -128,7 +165,7 @@ body .sidebar .profile p {
 }
 
 body .sidebar .menu-bar .hub-admin-btn {
-  margin-top: 14em;
+  margin-top: 13em;
 }
 
 body .content {
@@ -143,6 +180,11 @@ body .content .profile-details img {
 
 body .content .table-surat table th {
   text-align: center;
+}
+
+body .content .table-surat table th,
+body .content .table-surat table td {
+  vertical-align: middle;
 }
 
 body .modal .modal-title {

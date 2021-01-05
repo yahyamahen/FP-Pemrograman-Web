@@ -1,11 +1,17 @@
 <div class="col-md-2 sidebar">
-   <?php foreach ($mahasiswa as $mhs) : ?>
+   <?php foreach ($mahasiswa as $data) : ?>
       <div class="profile d-flex flex-column">
-         <div class="d-flex justify-content-center overflow-hidden align-self-center" style="width: 6em; height:6em; border-radius:400em;">
-            <img class="d-inline-block" style="width:6em;" src="images/<?= $mhs['npm'] ?>/<?= $mhs['foto_profil'] ?>" alt="profile">
-         </div>
-         <a class="card-link mt-3" href="akun"><?= $mhs['nama_mhs'] ?></a>
-         <!-- <p><?= $mhs['posisi'] ?></p> -->
+         <?php if (trim($data['foto_profil'] == '')) : ?>
+            <div class="d-flex justify-content-center overflow-hidden align-self-center" style="width: 6em; height:6em; border-radius:400em;">
+               <img class="d-inline-block align-self-center" style="width:8em;" src="images/guest_user.png" alt="guest">
+            </div>
+         <?php else : ?>
+            <div class="d-flex justify-content-center overflow-hidden align-self-center" style="width: 6em; height:6em; border-radius:400em;">
+               <img class="d-inline-block" style="width:6em;" src="images/<?= $data['npm'] ?>/<?= $data['foto_profil'] ?>" alt="profile">
+            </div>
+         <?php endif; ?>
+         <a class="card-link mt-3" href="akun"><?= $data['nama_mhs'] ?></a>
+         <!-- <p><?= $data['posisi'] ?></p> -->
          <p>mahasiswa</p>
       </div>
    <?php endforeach; ?>

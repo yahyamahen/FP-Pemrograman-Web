@@ -77,22 +77,172 @@ function suratNotice()
       <?php require_once "sidebar.php" ?>
 
       <div class="col-md-10">
-         <div class="detail-surat-section">
-            <?php foreach ($surat as $data) : ?>
-               <h2 class="mt-1" style="font-size: 1.5em;">SiPesan (Sistem Informasi Surat Pengantar Perusahaan)</h2>
-               <div class="d-flex justify-content-between">
-                  <p>Judul Surat : <?= $data['judul_surat'] ?></p>
-                  <div class="">
-                     <a class="badge badge-pill badge-info ml-1" style="font-size:1.4em" href="surat?id=<?= $data['id'] ?>">Cetak</a>
-                     <a class="badge badge-pill badge-success ml-1 edit-surat-btn" data-toggle="modal" data-target="#formModal-update" href="" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
-                     <!-- <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="surat?delete=<?= $data['id'] ?>">Hapus</a> -->
-                  <?php endforeach; ?>
+         <?php foreach ($surat as $data) : ?>
+            <?php if ($data['kategori'] == 'Magang') : ?>
+               <div class="detail-surat-section">
+                  <h2 class="mt-1" style="font-size: 1.5em;">SiPesan (Sistem Informasi Surat Pengantar Perusahaan)</h2>
+                  <div class="text-center ml-n5 mt-5">
+                     <p style="font-size: 1.1em;" class="mt-3">Kategori surat : <strong><?= $data['kategori'] ?></strong> </p>
+                     <p style="font-size: 1.1em;" class="mt-n3">Judul Surat : <?= $data['judul_surat'] ?></p>
+                     <div>
+                        <a class="badge badge-pill badge-success ml-1 edit-surat-btn" data-toggle="modal" data-target="#formModal-update" href="" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>" style="font-size:1em">Update</a>
+                        <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" onClick="window.print()">Cetak</a>
+                        <!-- <a class=" badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="surat?delete=<?= $data['id'] ?>">Hapus</a> -->
+                     </div>
                   </div>
                </div>
-         </div>
-         <div class="content">
+               <div class="content-surat ml-5" style="font-family: 'Times New Roman', Times, serif;">
+                  <div class="d-flex justify-content-between" style="padding: 0.4cm 0.5cm 0.4cm 0.5cm; border-bottom: 3px solid black;">
+                     <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 8em; height:8em;">
+                        <img src="images/logo_univ.png" alt="" class="d-inline-block align-self-center" style="width:7em;">
+                     </div>
+                     <div class="kop-header ml-2 mr-2" style="text-align: center;" class=" align-self-center">
+                        <h4><strong> FAKULTAS ILMU KOMPUTER </strong></h4>
+                        <h2><strong> UNIVERSITAS ROCKET SAKTI</strong></h2>
+                        <p><strong>Jl. Sanusi Raya No.59-62, Konohagakure, Surabaya, Jawa Timur</strong></p>
+                        <p><strong>Telp (0271) 3318112, Fax (0271) 192821</strong></p>
+                        <p>email : <a href="" class="card-link"><strong>rocketsakti@univ.ac.id</strong> </a>, Website : <a href="" class="card-link ml-n1"><strong> www.rocketsaktiuniversity.ac.id</strong></a></p>
+                     </div>
+                     <div class=" d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 8em; height:8em;">
+                        <img src="images/faculty-logo.png" alt="" class="d-inline-block align-self-center" style="width:8em;">
+                     </div>
+                  </div>
+                  <div class="no-surat mt-4 text-center">
+                     <p style="font-weight:900; text-decoration:underline; font-size:1.4em;">SURAT PENGANTAR</p>
+                     <p style="font-size:1.16em;" class="mt-n4">Nomor : B.12/49/MG/X/2020</p>
+                  </div>
+                  <div class="body-surat">
+                     <div class="tujuan-surat mb-4">
+                        <p> <strong>Yth.</strong> </p>
+                        <p>Bapak/Ibu Pimpinan Perusahaan</p>
+                        <p><strong><?= $data['perusahaan']; ?></strong></p>
+                     </div>
+                     <div class="isi-surat">
+                        <p class="text-justify" style="text-indent: 3em;">Sehubungan dengan diadakannya program PKL(Praktik Kerja Lapangan) oleh program studi Informatika Universitas Rocket Sakti yang merupakan kegiatan wajib yang harus dipenuhi oleh mahasiswa untuk menyelesaikan syarat kompetensi dalam Program Studi Infromatika Universtias Rocket Sakti. </p>
+                        <!-- <table cellspacing="0px" border="0px" class="ml-4 mb-4">
+                           <?php foreach ($mahasiswa as $mhs) : ?>
+                              <tr>
+                                 <td width="40%">Nama</td>
+                                 <td width="5%">:</td>
+                                 <td><?= $mhs['nama_mhs'] ?></td>
+                              </tr>
+                              <tr>
+                                 <td width="40%">NPM</td>
+                                 <td width="5%">:</td>
+                                 <td><?= $mhs['npm'] ?></td>
+                              </tr>
+                              <tr>
+                                 <td width="40%">Jurusan</td>
+                                 <td width="5%">:</td>
+                                 <td><?= $mhs['jurusan'] ?></td>
+                              </tr>
+                              <tr>
+                                 <td width="40%">Semester</td>
+                                 <td width="5%">:</td>
+                                 <td><?= $mhs['semester'] ?></td>
+                              </tr>
+                           <?php endforeach; ?>
+                        </table> -->
+                        <p class="text-justify" style="text-indent: 3em;"> Bersama surat ini kami <?= $data['perihal_lengkap'] ?></p>
 
-         </div>
+                        <p class="text-justify" style="text-indent: 3em;"> Demikian surat pengantar ini dibuat dengan sebenar-benarnya. Atas perhatian bapak/ibu Pimpinan <?= $data['perusahaan'] ?> kami ucapkan terimakasih.</p>
+
+                        <div class="ttd d-flex col-5 float-right flex-column text-center mt-5">
+                           <p>Mengetahui,</p>
+                           <p class="mb-5 mt-n2" style="line-height: 1.3em;">Dekan <br> Fakultas Ilmu Komputer <br> Universitas Rocket Sakti</p>
+
+
+
+                           <p class="mt-5" style="text-decoration: underline;"> <strong>DR. Anugrah Mansyur, M.T</strong> </p>
+                           <p class="mt-n4"> <strong>NIP. 3250818108201</strong> </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            <?php else : ?>
+               <div class="detail-surat-section">
+                  <h2 class="mt-1" style="font-size: 1.5em;">SiPesan (Sistem Informasi Surat Pengantar Perusahaan)</h2>
+                  <div class="text-center ml-n5 mt-5">
+                     <p style="font-size: 1.1em;" class="mt-3">Kategori surat : <strong><?= $data['kategori'] ?></strong> </p>
+                     <p style="font-size: 1.1em;" class="mt-n3">Judul Surat : <?= $data['judul_surat'] ?></p>
+                     <div>
+                        <a class="badge badge-pill badge-success ml-1 edit-surat-btn" data-toggle="modal" data-target="#formModal-update" href="" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>" style="font-size:1em">Update</a>
+                        <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" onClick="window.print()">Cetak</a>
+                        <!-- <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="surat?delete=<?= $data['id'] ?>">Hapus</a> -->
+                     </div>
+                  </div>
+               </div>
+               <div class="content-surat ml-5" style="font-family: 'Times New Roman', Times, serif;">
+                  <div class="d-flex justify-content-between" style="padding: 0.4cm 0.5cm 0.4cm 0.5cm; border-bottom: 3px solid black;">
+                     <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 8em; height:8em;">
+                        <img src="images/logo_univ.png" alt="" class="d-inline-block align-self-center" style="width:7em;">
+                     </div>
+                     <div class="kop-header ml-2 mr-2" style="text-align: center;" class=" align-self-center">
+                        <h4><strong> FAKULTAS ILMU KOMPUTER </strong></h4>
+                        <h2><strong> UNIVERSITAS ROCKET SAKTI</strong></h2>
+                        <p><strong>Jl. Sanusi Raya No.59-62, Konohagakure, Surabaya, Jawa Timur</strong></p>
+                        <p><strong>Telp (0271) 3318112, Fax (0271) 192821</strong></p>
+                        <p>email : <a href="" class="card-link"><strong>rocketsakti@univ.ac.id</strong> </a>, Website : <a href="" class="card-link ml-n1"><strong> www.rocketsaktiuniversity.ac.id</strong></a></p>
+                     </div>
+                     <div class=" d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 8em; height:8em;">
+                        <img src="images/faculty-logo.png" alt="" class="d-inline-block align-self-center" style="width:8em;">
+                     </div>
+                  </div>
+                  <div class="no-surat mt-4 text-center">
+                     <p style="font-weight:900; text-decoration:underline; font-size:1.4em;">SURAT PENGANTAR</p>
+                     <p style="font-size:1.16em;" class="mt-n4">Nomor : B.12/49/MG/X/2020</p>
+                  </div>
+                  <div class="body-surat">
+                     <div class="tujuan-surat mb-4">
+                        <p> <strong>Yth.</strong> </p>
+                        <p>Bapak/Ibu Pimpinan Perusahaan</p>
+                        <p><strong><?= $data['perusahaan']; ?></strong></p>
+                     </div>
+                     <div class="isi-surat">
+                        <p class="text-justify" style="text-indent: 3em;">Sehubungan dengan ditinjaunya keperluan studi eksternal oleh mahasiswa dengan pihak perusahaan.</p>
+                        <!-- <table cellspacing="0px" border="0px" class="ml-4 mb-4">
+                           <?php foreach ($mahasiswa as $mhs) : ?>
+                              <tr>
+                                 <td width="40%">Nama</td>
+                                 <td width="5%">:</td>s
+                                 <td><?= $mhs['nama_mhs'] ?></td>
+                              </tr>
+                              <tr>
+                                 <td width="40%">NPM</td>
+                                 <td width="5%">:</td>
+                                 <td><?= $mhs['npm'] ?></td>
+                              </tr>
+                              <tr>
+                                 <td width="40%">Jurusan</td>
+                                 <td width="5%">:</td>
+                                 <td><?= $mhs['jurusan'] ?></td>
+                              </tr>
+                              <tr>
+                                 <td width="40%">Semester</td>
+                                 <td width="5%">:</td>
+                                 <td><?= $mhs['semester'] ?></td>
+                              </tr>
+                           <?php endforeach; ?>
+                        </table> -->
+                        <p class="text-justify" style="text-indent: 3em;"> Maka bersama surat ini kami <?= $data['perihal_lengkap'] ?></p>
+
+                        <p class="text-justify" style="text-indent: 3em;"> Demikian surat pengantar ini dibuat dengan sebenar-benarnya. Atas perhatian bapak/ibu Pimpinan <?= $data['perusahaan'] ?> kami ucapkan terimakasih.</p>
+
+                        <div class="ttd d-flex col-5 float-right flex-column text-center mt-5">
+                           <p>Mengetahui,</p>
+                           <p class="mb-5 mt-n2" style="line-height: 1.3em;">Dekan <br> Fakultas Ilmu Komputer <br> Universitas Rocket Sakti</p>
+
+
+
+                           <p class="mt-5" style="text-decoration: underline;"> <strong>DR. Anugrah Mansyur, M.T</strong> </p>
+                           <p class="mt-n4"> <strong>NIP. 3250818108201</strong> </p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+            <?php endif; ?>
+         <?php endforeach; ?>
       </div>
 
       <!-- Modal -->
@@ -130,8 +280,8 @@ function suratNotice()
                      <div class="form-group">
                         <label for="perihal_lengkap">Perihal</label>
                         <textarea rows="4" class="form-control" id="perihal_lengkap" name="perihal_lengkap" placeholder="Perihal Lengkap"></textarea>
-                        <p style="font-size: 0.9em;">Contoh : <br>
-                           Menyatakan bahwa mahasiswa dengan data yang terlampir memohon untuk melakukan Praktik Kerja Lapangan pada pada perusahaan PT.DEF Kedelai mulai tanggal 15 Juli 2020 - 19 Desember 2020</p>
+                        <p style="font-size: 0.9em;"> <strong>Contoh : </strong> <br>
+                           menyatakan bahwa mahasiswa dengan data yang terlampir memohon untuk melakukan Praktik Kerja Lapangan pada <span style="color: red;"><strong>nama perusahaan</strong></span> mulai dari tanggal <span style="color: red;"><strong>15 Juli 2020</strong></span> sampai dengan tanggal <span style="color: red;"><strong>19 Desember 2020</strong></span>.</p>
                      </div>
 
                      <div class="modal-footer">

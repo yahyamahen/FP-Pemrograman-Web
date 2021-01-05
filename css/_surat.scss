@@ -3,4 +3,42 @@ body {
       margin: 1em;
       padding: 1.5em 0.5em 0.5em 0.5em;
    }
+
+   .content-surat {
+      background-color: white;
+      padding: 2em 3em 2em 3em;
+      margin: 2em 2em 2em 1em;
+      width: 25cm;
+      height: 33.7cm;
+      .kop-header {
+         p {
+            margin-bottom: 0.1em;
+         }
+      }
+
+      .body-surat {
+         padding: 0em 3em 0em 3em;
+         .tujuan-surat {
+            p {
+               font-size: 1.2em;
+               margin-bottom: 0em;
+            }
+         }
+
+         .isi-surat {
+            font-size: 1.2em;
+         }
+      }
+   }
+   @media print {
+      .detail-surat-section,
+      .col-md-2 {
+         display: none;
+      }
+   }
+}
+
+@page {
+   size: auto;
+   margin: 0mm;
 }

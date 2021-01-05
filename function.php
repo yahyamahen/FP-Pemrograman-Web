@@ -92,6 +92,7 @@ function inputSurat($data)
    $judul_surat = htmlspecialchars($data['judul_surat']);
    $perusahaan = htmlspecialchars($data['perusahaan']);
    $perihal_lengkap = htmlspecialchars($data['perihal_lengkap']);
+   $status_surat = 'Dalam pengajuan';
 
    if ($kategori == 'Magang') {
       $no_surat = "MG/" . htmlspecialchars($data['id']);
@@ -117,7 +118,7 @@ function inputSurat($data)
 
    mysqli_query(
       $conn,
-      "INSERT INTO surat VALUES ('', '$npm', '$no_surat', '$kategori', '$judul_surat', '$perusahaan', '$perihal_lengkap')"
+      "INSERT INTO surat (id, npm, no_surat, kategori, judul_surat, perusahaan, perihal_lengkap, status_surat) VALUES ('', '$npm', '$no_surat', '$kategori', '$judul_surat', '$perusahaan', '$perihal_lengkap', '$status_surat')"
    );
 
    echo mysqli_error($conn);

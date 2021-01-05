@@ -36,7 +36,9 @@ function mahasiswaUpdated()
    <link rel="stylesheet" href="css/style.css">
    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
 
-   <title>SiPesan</title>
+   <?php foreach ($mahasiswa as $data) : ?>
+      <title><?= $data['nama_mhs'] ?></title>
+   <?php endforeach; ?>
 
 </head>
 
@@ -56,9 +58,15 @@ function mahasiswaUpdated()
                </div>
                <div class="profile-details mt-4 ml-5">
                   <?php foreach ($mahasiswa as $mhs) : ?>
-                     <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 9em; height:9em; border-radius:400em;">
-                        <img class="d-inline-block align-self-center" style="width:9em;" src="images/<?= $mhs['npm'] ?>/<?= $mhs['foto_profil'] ?>" alt="profile">
-                     </div>
+                     <?php if (trim($data['foto_profil'] == '')) : ?>
+                        <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 9em; height:9em; border-radius:400em;">
+                           <img class="d-inline-block align-self-center" style="width:8em;" src="images/guest_user.png" alt="guest">
+                        </div>
+                     <?php else : ?>
+                        <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 9em; height:9em; border-radius:400em;">
+                           <img class="d-inline-block align-self-center" style="width:9em;" src="images/<?= $mhs['npm'] ?>/<?= $mhs['foto_profil'] ?>" alt="profile">
+                        </div>
+                     <?php endif; ?>
                      <table cellspacing="0px" cellpadding="1px" border="0px" class="ml-1">
                         <tr>
                            <td class="pr-5">Nama Mahasiswa</td>

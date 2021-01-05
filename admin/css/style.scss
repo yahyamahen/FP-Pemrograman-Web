@@ -1,14 +1,16 @@
 @import "login";
 @import "register";
-@import "akun";
 @import "surat";
+@import "mahasiswa";
 
 body {
-   background-color: #dfdfdf;
+   background-color: salmon;
    .sidebar {
       height: 100%;
       background-color: white;
-      padding: 2em 1.5em 2em 2em;
+      padding: 2em 2em 2em 2em;
+      margin-top: 2em;
+
       .profile {
          border-bottom: 1px solid #999999;
          img {
@@ -23,7 +25,7 @@ body {
 
       .menu-bar {
          .hub-admin-btn {
-            margin-top: 13em;
+            margin-top: 10em;
          }
       }
    }
@@ -38,14 +40,16 @@ body {
          }
       }
 
-      .table-surat {
+      .table-main {
          table {
             th {
                text-align: center;
             }
-
             th,
             td {
+               img {
+                  width: 4em;
+               }
                vertical-align: middle;
             }
          }
@@ -54,7 +58,7 @@ body {
 
    .modal {
       .modal-title {
-         margin-left: 16.5em;
+         margin-left: 8em;
       }
    }
 }

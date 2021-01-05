@@ -30,6 +30,7 @@ function suratNotice()
 {
    global $conn;
    if (isset($_POST["input"])) {
+      var_dump($_POST);
       if (inputSurat($_POST) == 1) {
          echo
             "<script>
@@ -99,30 +100,36 @@ if (isset($_GET["delete"])) {
          <div class="content">
             <h2 class="mt-1">SiPesan (Sistem Informasi Surat Pengantar Perusahaan)</h2>
             <div class="profile-details d-flex mt-4">
-               <?php foreach ($mahasiswa as $mhs) : ?>
-                  <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 8em; height:8em; border-radius:400em;">
-                     <img class="d-inline-block align-self-center" style="width:8em;" src="images/<?= $mhs['npm'] ?>/<?= $mhs['foto_profil'] ?>" alt="profile">
-                  </div>
+               <?php foreach ($mahasiswa as $data) : ?>
+                  <?php if (trim($data['foto_profil'] == '')) : ?>
+                     <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 8em; height:8em; border-radius:400em;">
+                        <img class="d-inline-block align-self-center" style="width:8em;" src="images/guest_user.png" alt="guest">
+                     </div>
+                  <?php else : ?>
+                     <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 8em; height:8em; border-radius:400em;">
+                        <img class="d-inline-block align-self-center" style="width:8em;" src="images/<?= $data['npm'] ?>/<?= $data['foto_profil'] ?>" alt="profile">
+                     </div>
+                  <?php endif; ?>
                   <table cellspacing="0px" cellpadding="1px" border="0px" class="ml-4 mt-2">
                      <tr>
                         <td class="pr-5">Nama Mahasiswa</td>
                         <td align="center">:</td>
-                        <td class="pl-2"><?= $mhs['npm']; ?></td>
+                        <td class="pl-2"><?= $data['npm']; ?></td>
                      </tr>
                      <tr>
                         <td class="pr-5">NPM</td>
                         <td align="center">:</td>
-                        <td class="pl-2"><?= $mhs['nama_mhs'] ?></td>
+                        <td class="pl-2"><?= $data['nama_mhs'] ?></td>
                      </tr>
                      <tr>
                         <td class="pr-5">Jurusan</td>
                         <td align="center">:</td>
-                        <td class="pl-2"><?= $mhs['jurusan'] ?></td>
+                        <td class="pl-2"><?= $data['jurusan'] ?></td>
                      </tr>
                      <tr>
                         <td class="pr-5">Semester</td>
                         <td align="center">:</td>
-                        <td class="pl-2"><?= $mhs['semester'] ?></td>
+                        <td class="pl-2"><?= $data['semester'] ?></td>
                      </tr>
                   </table>
                <?php endforeach; ?>
@@ -158,7 +165,8 @@ if (isset($_GET["delete"])) {
                         <th>File Surat</th>
                         <th>Kategori</th>
                         <th>Perusahaan</th>
-                        <th>Kegiatan</th>
+                        <th>Status Pengajuan</th>
+                        <th></th>
                      </tr>
                   </thead>
                   <tbody>
@@ -170,7 +178,8 @@ if (isset($_GET["delete"])) {
                               <td><a class="card-link" style="font-weight: 500;" href="surat?id=<?= $data['id'] ?>"><?= $data['judul_surat'] ?></a></td>
                               <td align="center"><?= $data['kategori'] ?></td>
                               <td align="center"><?= $data['perusahaan'] ?></td>
-                              <td width="20%" class=" text-center">
+                              <td align="center"><strong><?= $data['status_surat'] ?></strong></td>
+                              <td width="10%" class=" text-center">
                                  <a class="badge badge-pill badge-primary ml-1" href="surat?id=<?= $data['id'] ?>">Detail</a>
                                  <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="home?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
                                  <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>">Hapus</a>
@@ -185,8 +194,9 @@ if (isset($_GET["delete"])) {
                               <th><?= $i; ?></th>
                               <td><a class="card-link" style="font-weight: 500;" href="surat?id=<?= $data['id'] ?>"><?= $data['judul_surat'] ?></a></td>
                               <td align="center"><?= $data['kategori'] ?></td>
-                              <td width="15%" align="center"><?= $data['perusahaan'] ?></td>
-                              <td class=" text-center">
+                              <td align="center"><?= $data['perusahaan'] ?></td>
+                              <td align="center"><strong><?= $data['status_surat'] ?></strong></td>
+                              <td width="10%" class=" text-center">
                                  <a class="badge badge-pill badge-primary ml-1" href="surat?id=<?= $data['id'] ?>">Detail</a>
                                  <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="home?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
                                  <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>">Hapus</a>
@@ -212,7 +222,7 @@ if (isset($_GET["delete"])) {
                   </button>
                </div>
                <div class="modal-body">
-                  <form action="#" method="post" enctype="multipart/form-data">
+                  <form action="" method="post" enctype="multipart/form-data">
                      <input type="hidden" name="id" id="id">
                      <input type="hidden" name="npm" id="npm" value="<?= $npm; ?>">
                      <div class="form-group">
@@ -233,11 +243,20 @@ if (isset($_GET["delete"])) {
                         <input type="text" class="form-control" id="perusahaan" name="perusahaan" placeholder="perusahaan">
                      </div>
 
+                     <!-- <label for="perusahaan">Anggota Mahasiswa</label>
+                     <div class="form-group input-group" id="dynamic_field">
+                        <input type="text" name="anggota_mhs[]" id="anggota_mhs" class="form-control" placeholder="Anggota Mahasiswa 1">
+                        <input type="number" name="npm_anggota_mhs[]" id="npm_anggota_mhs" class="form-control ml-4" placeholder="NPM Anggota Mahasiswa 1">
+                        <button type="button" name="add" id="add" class="btn btn-success ml-2 mb-3">+</button>
+                     </div> -->
+
                      <div class="form-group">
                         <label for="perihal_lengkap">Perihal</label>
                         <textarea rows="4" class="form-control" id="perihal_lengkap" name="perihal_lengkap" placeholder="Perihal Lengkap"></textarea>
-                        <p style="font-size: 0.9em;">Contoh : <br>
-                           Menyatakan bahwa mahasiswa dengan data yang terlampir memohon untuk melakukan Praktik Kerja Lapangan pada pada perusahaan PT.DEF Kedelai mulai tanggal 15 Juli 2020 - 19 Desember 2020</p>
+                        <p style="font-size: 0.9em;"> <strong>Contoh Perihal Magang : </strong> <br>
+                           menyatakan bahwa mahasiswa dengan data yang terlampir memohon untuk melakukan Praktik Kerja Lapangan pada <span style="color: red;"><strong>nama perusahaan</strong></span> mulai dari tanggal <span style="color: red;"><strong>15 Juli 2020</strong></span> sampai dengan tanggal <span style="color: red;"><strong>19 Desember 2020</strong></span>.</p>
+                        <p style="font-size: 0.9em;"> <strong>Contoh Perihal Studi : </strong> <br>
+                           menyatakan bahwa mahasiswa dengan data yang terlampir memohon untuk melakukan studi pada <span style="color: red;"><strong>nama perusahaan</strong></span> untuk memenuhi persyaratan tugas dari <span style="color: red;"><strong> mata kuliah/skripsi </strong></span>yang sedang ditempuh mahasiswa.</p>
                      </div>
 
                      <div class="modal-footer">
@@ -274,11 +293,26 @@ if (isset($_GET["delete"])) {
 
    <script src="js/script.js"></script>
    <script>
+      $(document).ready(function() {
+         var i = 0;
+         $('#add').click(function() {
+            i++;
+            $('#dynamic_field').append('<div class="form-group input-group" id="row' + i + '"><input type="text" name="anggota_mhs[]" id="anggota_mhs" class="form-control" placeholder="Anggota Mahasiswa ' + (i + 1) + '"><input type="number" name="npm_anggota_mhs[]" id="npm_anggota_mhs" class="form-control ml-4" placeholder="NPM Anggota Mahasiswa ' + (i + 1) + '"><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove ml-2 ">X</button></div>');
+         });
+
+         $(document).on('click', '.btn_remove', function() {
+            i--;
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+         });
+
+      });
+
       $(function() {
          $('.tombolTambahData').on('click', function() {
             $('#judulModal').html('Buat Surat');
             $('.modal-footer button[type=submit]').html('Buat Surat');
-            $('.modal-footer button[type=submit]').addClass('btn btn-primary');
+            $('.modal-footer button[type=submit]').addClass('btn btn-info');
             // $('#kategori').val('');
             $('#judul_surat').val('');
             $('#perusahaan').val('');
