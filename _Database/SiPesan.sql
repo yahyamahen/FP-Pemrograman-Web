@@ -40,4 +40,3 @@ CREATE OR REPLACE TABLE surat
 
 ALTER TABLE surat
       ADD FOREIGN KEY (npm) REFERENCES mahasiswa (npm);
-      

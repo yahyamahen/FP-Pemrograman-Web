@@ -19,11 +19,13 @@
    <div class="menu-bar p-2 d-flex flex-column">
       <p class="mt-2 align-self-center">MENU</p>
       <ul class="list-group">
-         <li class="list-inline mb-2"><a href="home" class=" card-link"><i class="fas fa-at mr-2"></i>Daftar Surat</a></li>
+         <li class="list-inline mb-2"><a href="home" class=" card-link"><i class="fas fa-envelope mr-2"></i>Daftar Surat</a></li>
          <li class="list-inline mb-2"><a href="akun" class=" card-link"><i class="far fa-user mr-2"></i>Akun</a></li>
          <li class="list-inline mb-2"><a href="logout" class=" card-link"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
       </ul>
 
-      <button class="btn btn-outline-primary hub-admin-btn">Hubungi Admin</button>
+      <?php foreach ($mahasiswa as $data) : ?>
+         <a href="https://wa.me/6285649572121?text=Halo%20Admin%20SiPesan%20Saya%20<?= $data['nama_mhs'] ?>%20NPM%20:%20<?= $data['npm'] ?>%20_ingin%20mengetik%20keluh%20kesah%20saya_" target="_blank" class="btn btn-outline-primary hub-admin-btn">Hubungi Admin</a>
+      <?php endforeach; ?>
    </div>
 </div>

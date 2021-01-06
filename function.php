@@ -45,10 +45,18 @@ function registration($data)
    $password2 = mysqli_real_escape_string($conn, $data["password2"]);
 
    $result = mysqli_query($conn, "SELECT npm FROM mahasiswa WHERE npm = '$npm'");
-
    if (mysqli_fetch_assoc($result)) {
       echo "<script>
                alert('NPM Sudah Terdaftar');
+            </script>";
+      return false;
+   }
+
+   $result = mysqli_query($conn, "SELECT email FROM mahasiswa WHERE email = '$email'");
+
+   if (mysqli_fetch_assoc($result)) {
+      echo "<script>
+               alert('Email Sudah Terdaftar');
             </script>";
       return false;
    }
@@ -61,9 +69,6 @@ function registration($data)
    }
 
    $password = password_hash($password, PASSWORD_DEFAULT);
-   // $password = md5($password);
-   // var_dump($password);
-   // die;
 
    mysqli_query(
       $conn,
@@ -95,9 +100,9 @@ function inputSurat($data)
    $status_surat = 'Dalam pengajuan';
 
    if ($kategori == 'Magang') {
-      $no_surat = "MG/" . htmlspecialchars($data['id']);
+      $no_surat = null;
    } else if ($kategori == 'Studi') {
-      $no_surat = "STD/" . htmlspecialchars($data['id']);
+      $no_surat = null;
    }
 
    $result = mysqli_query($conn, "SELECT id FROM surat WHERE id = '$id'");
@@ -247,4 +252,38 @@ function upload()
 
    echo $path . "/" . $namaFileBaru;
    return $namaFileBaru;
+}
+
+function updatePassword($data)
+{
+   global $conn;
+   $npm = htmlspecialchars($data['npm_pass']);
+   $password_lama = mysqli_real_escape_string($conn, $data["password_lama"]);
+   $password_lama_hash = $data["password_lama_hash"];
+   $password_baru = mysqli_real_escape_string($conn, $data["password_baru"]);
+   $konfirm_password_baru = mysqli_real_escape_string($conn, $data["konfirm_password_baru"]);
+
+   if (password_verify($password_lama, $password_lama_hash)) {
+      if ($password_baru !== $konfirm_password_baru) {
+         echo
+            "<script>
+               alert('Konfirmasi password Tidak Sesuai');
+            </script>";
+         return false;
+      } else {
+         $password = password_hash($data['password_baru'], PASSWORD_DEFAULT);
+      }
+   } else {
+      echo
+         "<script>
+            alert('Password lama salah');
+         </script>";
+      return false;
+   }
+
+
+   $query = "UPDATE mahasiswa SET pass = '$password' WHERE npm = '$npm';";
+
+   mysqli_query($conn, $query);
+   return mysqli_affected_rows($conn);
 }

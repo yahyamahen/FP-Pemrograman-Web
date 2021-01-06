@@ -110,7 +110,7 @@ if (isset($_POST['login'])) {
                <?php endif; ?>
             </form>
             <div class="text-center mb-2 col-md-12"><a href="register">Register Akun</a></div>
-            <div class="text-center col-md-12">Lupa Password? <a href="#">Hubungi Admin</a></div>
+            <div class="text-center col-md-12">Lupa Password? <a href="https://wa.me/6285649572121?text=Halo%20Admin%20SiPesan%20Saya%20_*Nama%20Mahasiswa*_%20NPM%20:%20_*NPM%20Mahasiswa*_%20meminta%20request%20untuk%20ganti%20password" target="_blank" class="card-link hub-admin-btn">Hubungi Admin</a></div>
          </div>
       </div>
 

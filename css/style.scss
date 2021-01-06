@@ -5,32 +5,39 @@
 
 body {
    background-color: #dfdfdf;
-   .sidebar {
-      height: 100%;
-      background-color: white;
-      padding: 2em 1.5em 2em 2em;
-      .profile {
-         border-bottom: 1px solid #999999;
-         img {
-            align-self: center;
-            width: 5em;
+   .sidebar-outer {
+      position: relative;
+      .sidebar {
+         position: fixed;
+         left: 0;
+         top: 0;
+         bottom: 0;
+         background-color: white;
+         padding: 2em 1.5em 2em 2em;
+         .profile {
+            border-bottom: 1px solid #999999;
+            img {
+               align-self: center;
+               width: 5em;
+            }
+            a,
+            p {
+               text-align: center;
+            }
          }
-         a,
-         p {
-            align-self: center;
-         }
-      }
 
-      .menu-bar {
-         .hub-admin-btn {
-            margin-top: 13em;
+         .menu-bar {
+            .hub-admin-btn {
+               margin-top: 13em;
+            }
          }
       }
    }
 
    .content {
+      // display: none;
       padding: 2em 3em 2em 3em;
-      margin: 2em 2em 2em 1em;
+      margin: 2em 2em 2em 2em;
       background-color: white;
       .profile-details {
          img {

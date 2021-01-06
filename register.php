@@ -67,7 +67,7 @@ function mahasiswaCreated()
                <div class="col-md-6">
                   <label for="jurusan" class="form-label">Jurusan</label>
                   <select id="jurusan" name="jurusan" class="form-control">
-                     <option selected value="Teknik Infromatika">Teknik Informatika</option>
+                     <option selected value="Teknik Informatika">Teknik Informatika</option>
                      <option value="Sistem Informasi">Sistem Informasi</option>
                   </select>
                </div>
@@ -94,7 +94,7 @@ function mahasiswaCreated()
             </form>
             <div class="col-12">
                <li class="list-group text-center mt-2"><a href="login">LOGIN</a></li>
-               <p class="text-center">NPM sudah digunakan? <a href="#">Hubungi Admin</a></p>
+               <p class="text-center">NPM sudah digunakan? <a href="https://wa.me/6285649572121?text=Halo%20Admin%20SiPesan%20Saya%20_*Nama%20Mahasiswa*_%20NPM%20:%20_*NPM%20Mahasiswa*_%20npm%20saya%20sudah%20digunakan%20user%20lain" target="_blank" class="card-link hub-admin-btn">Hubungi Admin</a></p>
             </div>
          </div>
       </div>

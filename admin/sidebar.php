@@ -11,8 +11,8 @@
 
       <p class="mt-2 align-self-center">MENU</p>
       <ul class="list-group">
-         <li class="list-inline mb-2"><a href="surat" class=" card-link"><i class="fas fa-user-graduate mr-2"></i>Daftar Surat</a></li>
-         <li class="list-inline mb-2"><a href="mahasiswa" class=" card-link"><i class="fas fa-envelope mr-2"></i>Mahasiswa</a></li>
+         <li class="list-inline mb-2"><a href="home" class=" card-link"><i class="fas fa-envelope  mr-2"></i>Daftar Surat</a></li>
+         <li class="list-inline mb-2"><a href="mahasiswa" class=" card-link"><i class="fas fa-user-graduate mr-2"></i>Mahasiswa</a></li>
          <li class="list-inline mb-2"><a href="logout" class=" card-link"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
       </ul>
 

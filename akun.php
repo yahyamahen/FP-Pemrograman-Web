@@ -20,6 +20,20 @@ function mahasiswaUpdated()
    }
 }
 
+function passwordUpdated()
+{
+   global $conn;
+   if (isset($_POST['update_password'])) {
+      if (updatePassword($_POST) > 0) {
+         echo
+            "<script>
+            alert('Password Terupdate');
+            document.location.href= 'akun';
+         </script>";
+      }
+   }
+}
+
 ?>
 
 <!doctype html>
@@ -43,9 +57,10 @@ function mahasiswaUpdated()
 </head>
 
 <body>
-
    <div class="row">
-      <?php require_once "sidebar.php" ?>
+      <div class="col-md-2 sidebar-outer">
+         <?php require_once "sidebar.php" ?>
+      </div>
 
       <div class="col-md-10">
          <div class="row akun-body">
@@ -96,11 +111,10 @@ function mahasiswaUpdated()
                         </tr>
                         <tr>
                            <td colspan="3">
-                              <p><a href="#" class="pt-2 d-block card-link">Ganti Password</a></p>
+                              <p><a data-toggle="modal" data-target="#form-update-password" href="detail_mahasiswa?npm=<?= $data['npm'] ?>" class="pt-2 d-block card-link">Ganti Password</a></p>
                            </td>
                         </tr>
                      </table>
-
                   <?php endforeach; ?>
                </div>
             </div>
@@ -161,6 +175,48 @@ function mahasiswaUpdated()
             </div>
             </form>
             <?php mahasiswaUpdated(); ?>
+         </div>
+      </div>
+   </div>
+
+   <div class="modal fade" id="form-update-password" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title ml-5 pl-5" id="judulModal">UPDATE PASSWORD</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form action="" class="row g-3" method="POST">
+                  <div class="row biodata-body">
+                     <input type="hidden" name="npm_pass" id="npm_pass" value="<?= $data['npm'] ?>">
+                     <input type="hidden" name="password_lama_hash" id="password_lama_hash" value="<?= $data['pass'] ?>">
+                     <div class="col-md-12">
+                        <label for="npm" class="form-label">NPM</label>
+                        <input type="text" class="form-control" id="npm_pass" name="npm_pass" placeholder="NPM" value="<?= $data['npm']; ?>" disabled>
+                     </div>
+                     <div class="col-12">
+                        <label for="password_lama" class="form-label">Password Lama</label>
+                        <a href="https://wa.me/6285649572121?text=Halo%20Admin%20SiPesan%20Saya%20<?= $data['nama_mhs'] ?>%20NPM%20:%20<?= $data['npm'] ?>%20meminta%20request%20untuk%20ganti%20password" target="_blank" class="card-link hub-admin-btn float-right">Lupa Password</a>
+                        <input type="password" class="form-control" id="password_lama" name="password_lama" placeholder="********">
+                     </div>
+                     <div class="col-12">
+                        <label for="password_baru" class="form-label">Password Baru</label>
+                        <input type="password" class="form-control" id="password_baru" name="password_baru" placeholder="********">
+                     </div>
+                     <div class="col-12">
+                        <label for="konfirm_password_baru" class="form-label">Konfirmasi Password Baru</label>
+                        <input type="password" class="form-control" id="konfirm_password_baru" name="konfirm_password_baru" placeholder="********">
+                     </div>
+                  </div>
+            </div>
+            <div class="modal-footer mt-n2 d-flex">
+               <button type="submit" name="update_password" id="update_password" class="btn btn-info modal-button w-25">Update Password</button>
+            </div>
+            </form>
+            <?php passwordUpdated(); ?>
          </div>
       </div>
    </div>

@@ -1,38 +1,45 @@
 @import "login";
 @import "register";
 @import "surat";
+@import "detail_surat";
 @import "mahasiswa";
+@import "detail_mahasiswa";
 
 body {
-   background-color: salmon;
-   .sidebar {
-      height: 100%;
-      background-color: white;
-      padding: 2em 2em 2em 2em;
-      margin-top: 2em;
+   background-color: #dfdfdf;
+   .sidebar-outer {
+      position: relative;
+      .sidebar {
+         position: fixed;
+         top: 0;
+         left: 0;
+         bottom: 0;
+         background-color: white;
+         padding: 2em 1.5em 2em 2em;
+         .profile {
+            border-bottom: 1px solid #999999;
+            img {
+               align-self: center;
+               width: 5em;
+            }
+            a,
+            p {
+               align-self: center;
+            }
+         }
 
-      .profile {
-         border-bottom: 1px solid #999999;
-         img {
-            align-self: center;
-            width: 5em;
-         }
-         a,
-         p {
-            align-self: center;
-         }
-      }
-
-      .menu-bar {
-         .hub-admin-btn {
-            margin-top: 10em;
-         }
+         // .menu-bar {
+         //    .hub-admin-btn {
+         //       margin-top: 13em;
+         //    }
+         // }
       }
    }
 
    .content {
+      // display: none;
       padding: 2em 3em 2em 3em;
-      margin: 2em 2em 2em 1em;
+      margin: 2em 2em 2em 2em;
       background-color: white;
       .profile-details {
          img {
@@ -40,16 +47,14 @@ body {
          }
       }
 
-      .table-main {
+      .table-surat {
          table {
             th {
                text-align: center;
             }
+
             th,
             td {
-               img {
-                  width: 4em;
-               }
                vertical-align: middle;
             }
          }
@@ -58,7 +63,7 @@ body {
 
    .modal {
       .modal-title {
-         margin-left: 8em;
+         margin-left: 16.5em;
       }
    }
 }

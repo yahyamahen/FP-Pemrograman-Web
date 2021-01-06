@@ -11,6 +11,4 @@ if (!isset($_SESSION["admin"])) {
 if (isset($_SESSION['admin']) && isset($_SESSION['username'])) {
    $username = $_SESSION['username'];
    $user = read("SELECT * FROM user WHERE username = '$username'");
-   $mahasiswa = read("SELECT * FROM mahasiswa WHERE npm = '$npm'");
-   $surat = read("SELECT * FROM surat WHERE id = '$id'");
 }
