@@ -72,42 +72,42 @@ function passwordUpdated()
                   <?php endforeach; ?>
                </div>
                <div class="profile-details mt-4 ml-5">
-                  <?php foreach ($mahasiswa as $mhs) : ?>
+                  <?php foreach ($mahasiswa as $data) : ?>
                      <?php if (trim($data['foto_profil'] == '')) : ?>
                         <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 9em; height:9em; border-radius:400em;">
                            <img class="d-inline-block align-self-center" style="width:8em;" src="images/guest_user.png" alt="guest">
                         </div>
                      <?php else : ?>
                         <div class="d-flex justify-content-center overflow-hidden align-self-center mb-4" style="width: 9em; height:9em; border-radius:400em;">
-                           <img class="d-inline-block align-self-center" style="width:9em;" src="images/<?= $mhs['npm'] ?>/<?= $mhs['foto_profil'] ?>" alt="profile">
+                           <img class="d-inline-block align-self-center" style="width:9em;" src="images/<?= $data['npm'] ?>/<?= $data['foto_profil'] ?>" alt="profile">
                         </div>
                      <?php endif; ?>
                      <table cellspacing="0px" cellpadding="1px" border="0px" class="ml-1">
                         <tr>
                            <td class="pr-5">Nama Mahasiswa</td>
                            <td align="center">:</td>
-                           <td class="pl-2"><?= $mhs['npm']; ?></td>
+                           <td class="pl-2"><?= $data['npm']; ?></td>
                         </tr>
 
                         <tr>
                            <td class="pr-5">NPM</td>
                            <td align="center">:</td>
-                           <td class="pl-2"><?= $mhs['nama_mhs'] ?></td>
+                           <td class="pl-2"><?= $data['nama_mhs'] ?></td>
                         </tr>
                         <tr>
                            <td class="pr-5">Jurusan</td>
                            <td align="center">:</td>
-                           <td class="pl-2"><?= $mhs['jurusan'] ?></td>
+                           <td class="pl-2"><?= $data['jurusan'] ?></td>
                         </tr>
                         <tr>
                            <td class="pr-5">Semester</td>
                            <td align="center">:</td>
-                           <td class="pl-2"><?= $mhs['semester'] ?></td>
+                           <td class="pl-2"><?= $data['semester'] ?></td>
                         </tr>
                         <tr>
                            <td class="pr-5">Email</td>
                            <td align="center">:</td>
-                           <td class="pl-2"><?= $mhs['email'] ?></td>
+                           <td class="pl-2"><?= $data['email'] ?></td>
                         </tr>
                         <tr>
                            <td colspan="3">
