@@ -70,6 +70,8 @@ function validasiSurat($data)
    global $conn;
    $id = htmlspecialchars($data["id"]);
    $npm = htmlspecialchars($data["npm"]);
+   $nama_mhs = htmlspecialchars($data["nama_mhs"]);
+   $email = htmlspecialchars($data["email"]);
    $kategori = htmlspecialchars($data["kategori"]);
    $judul_surat = htmlspecialchars($data['judul_surat']);
    $perusahaan = htmlspecialchars($data['perusahaan']);
@@ -88,6 +90,7 @@ function validasiSurat($data)
    $query = "UPDATE surat SET status_surat = '$status_surat', no_surat = '$no_surat' WHERE npm = '$npm' && id = '$id';";
    mysqli_query($conn, $query);
    return mysqli_affected_rows($conn);
+   // exit;
 }
 
 function delete_surat($npm, $id)
@@ -176,7 +179,7 @@ function upload()
 
    if ($error === 4) {
       echo
-         "<script>
+      "<script>
    		alert('Pilih gambar terlebih dahulu');
    	</script>";
       return false;
@@ -187,7 +190,7 @@ function upload()
    $ekstensiGambar = strtolower(end($ekstensiGambar));
    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
       echo
-         "<script>
+      "<script>
 			alert('Yang diupload harus gambar');
 		</script>";
       return false;
@@ -195,7 +198,7 @@ function upload()
 
    if ($ukuranFile > 5000000) {
       echo
-         "<script>
+      "<script>
 			alert('File gambar minimal berukuran 4096kb');
 		</script>";
       return false;

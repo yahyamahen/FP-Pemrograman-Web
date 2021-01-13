@@ -3,7 +3,7 @@ session_start();
 require_once "function.php";
 require_once "model.php";
 
-$kategori = read("SELECT kategori FROM surat LIMIT 2;");
+$kategori = read("SELECT kategori FROM surat GROUP BY kategori;");
 $surat = read("SELECT * FROM surat, mahasiswa WHERE surat.npm = mahasiswa.npm ORDER BY id DESC;");
 
 if (isset($_POST['search_btn'])) {
@@ -45,7 +45,7 @@ function suratNotice()
       var_dump($_POST);
       if (inputSurat($_POST) == 1) {
          echo
-            "<script>
+         "<script>
             alert('Surat Berhasil Ditambahkan');
             document.location.href = 'home';
          </script>";
@@ -58,7 +58,7 @@ function suratNotice()
    if (isset($_POST["validasi"])) {
       if (validasiSurat($_POST) > 0) {
          echo
-            "<script>
+         "<script>
             alert('Status Surat Terupdate');
             document.location.href = 'home';
          </script>";
@@ -70,7 +70,7 @@ function suratNotice()
    if (isset($_POST["update"])) {
       if (updateSurat($_POST) > 0) {
          echo
-            "<script>
+         "<script>
                alert('Surat Berhasil Diupdate');
                document.location.href = 'home';
             </script>";
@@ -86,13 +86,13 @@ if (isset($_GET["delete"])) {
    $npm = $_SESSION["npm"];
    if (delete_surat($npm, $id) > 0) {
       echo
-         "<script>
+      "<script>
             alert('Surat Berhasil Dihapus');
             document.location.href='home';
          </script>";
    } else {
       echo
-         "<script>
+      "<script>
             alert('Surat Tidak Berhasil Terhapus : Error " . mysqli_error($conn) . "');
          </sciprt>";
    }
@@ -179,7 +179,7 @@ if (isset($_GET["delete"])) {
                                  </td>
                               <?php endif; ?>
                               <td width="10%" class=" text-center">
-                                 <a class="badge badge-pill badge-warning ml-1 tampilModalValidasi" href="detail_surat?id=<?= $data['id'] ?>" data-toggle="modal" data-target="#formModal-validasi" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-status_surat="<?= $data['status_surat'] ?>" data-no_surat="<?= $data['no_surat'] ?>">Status</a>
+                                 <a class="badge badge-pill badge-warning ml-1 tampilModalValidasi" href="detail_surat?id=<?= $data['id'] ?>" data-toggle="modal" data-target="#formModal-validasi" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-nama_mhs="<?= $data['nama_mhs'] ?>" data-email="<?= $data['email'] ?>" data-judul_surat=" <?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-status_surat="<?= $data['status_surat'] ?>" data-no_surat="<?= $data['no_surat'] ?>">Status</a>
                                  <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="home?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
                                  <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>">Hapus</a>
                               </td>
@@ -205,7 +205,7 @@ if (isset($_GET["delete"])) {
                                  </td>
                               <?php endif; ?>
                               <td width="10%" class=" text-center">
-                                 <a class="badge badge-pill badge-warning ml-1 tampilModalValidasi" href="detail_surat?id=<?= $data['id'] ?>" data-toggle="modal" data-target="#formModal-validasi" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-status_surat="<?= $data['status_surat'] ?>" data-no_surat="<?= $data['no_surat'] ?>">Status</a>
+                                 <a class="badge badge-pill badge-warning ml-1 tampilModalValidasi" href="detail_surat?id=<?= $data['id'] ?>" data-toggle="modal" data-target="#formModal-validasi" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-email="<?= $data['email'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-status_surat="<?= $data['status_surat'] ?>" data-no_surat="<?= $data['no_surat'] ?>">Status</a>
                                  <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="home?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
                                  <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>">Hapus</a>
                               </td>
@@ -292,6 +292,8 @@ if (isset($_GET["delete"])) {
                <form action="" method="post">
                   <input type="hidden" name="id" id="id">
                   <input type="hidden" name="npm" id="npm">
+                  <input type="hidden" name="nama_mhs" id="nama_mhs">
+                  <input type="hidden" name="email" id="email">
                   <input type="hidden" name="kategori" id="kategori">
                   <input type="hidden" name="judul_surat" id="judul_surat">
                   <input type="hidden" name="perusahaan" id="perusahaan">
@@ -402,6 +404,8 @@ if (isset($_GET["delete"])) {
 
             let id = $(this).data('id');
             let npm = $(this).data('npm');
+            let nama_mhs = $(this).data('nama_mhs');
+            let email = $(this).data('email');
             let judul_surat = $(this).data('judul_surat');
             let kategori = $(this).data('kategori');
             let perusahaan = $(this).data('perusahaan');
@@ -409,6 +413,8 @@ if (isset($_GET["delete"])) {
 
             $('.modal-body #id').val(id);
             $('.modal-body #npm').val(npm);
+            $('.modal-body #nama_mhs').val(nama_mhs);
+            $('.modal-body #email').val(email);
             $('.modal-body #judul_surat').val(judul_surat);
             $('.modal-body #kategori').val(kategori);
             $('.modal-body #perusahaan').val(perusahaan);

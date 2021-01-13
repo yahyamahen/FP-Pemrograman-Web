@@ -3,7 +3,7 @@ session_start();
 require_once "function.php";
 require_once "model.php";
 
-$kategori = read("SELECT kategori FROM surat LIMIT 2;");
+$kategori = read("SELECT kategori FROM surat GROUP BY kategori;");
 $surat = read("SELECT * FROM surat WHERE npm = '$npm' ORDER BY id DESC");
 
 if (isset($_POST['search_btn'])) {
@@ -32,7 +32,7 @@ function suratNotice()
       var_dump($_POST);
       if (inputSurat($_POST) == 1) {
          echo
-            "<script>
+         "<script>
             alert('Surat Berhasil Ditambahkan');
             document.location.href = 'home';
          </script>";
@@ -45,7 +45,7 @@ function suratNotice()
    if (isset($_POST["update"])) {
       if (updateSurat($_POST) == 1) {
          echo
-            "<script>
+         "<script>
                alert('Surat Berhasil Diupdate');
                document.location.href = 'home';
             </script>";
@@ -61,13 +61,13 @@ if (isset($_GET["delete"])) {
    $npm = $_SESSION["npm"];
    if (delete_surat($npm, $id) > 0) {
       echo
-         "<script>
+      "<script>
             alert('Surat Berhasil Dihapus');
             document.location.href='home';
          </script>";
    } else {
       echo
-         "<script>
+      "<script>
             alert('Surat Tidak Berhasil Terhapus : Error " . mysqli_error($conn) . "');
          </sciprt>";
    }
@@ -326,7 +326,6 @@ if (isset($_GET["delete"])) {
             var button_id = $(this).attr("id");
             $('#row' + button_id + '').remove();
          });
-
       });
 
       $(function() {

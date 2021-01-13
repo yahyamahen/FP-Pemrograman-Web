@@ -9,24 +9,24 @@ $surat = read("SELECT * FROM surat WHERE id = '$id' && npm = '$npm';");
 function suratNotice()
 {
    global $conn;
-   // if (isset($_POST["input"])) {
-   //    if (inputSurat($_POST) == 1) {
-   //       echo
-   //          "<script>
-   //          alert('Surat Berhasil Ditambahkan');
-   //          document.location.href = 'home';
-   //       </script>";
-   //    } else {
-   //       echo "<script> alert('Error :  " . mysqli_error($conn) . "'</script>;";
-   //       echo mysqli_error($conn);
-   //    }
-   // }
+   if (isset($_POST["input"])) {
+      if (inputSurat($_POST) > 0) {
+         echo
+         "<script>
+            alert('Surat Berhasil Ditambahkan');
+            document.location.href = 'home';
+         </script>";
+      } else {
+         echo "<script> alert('Error :  " . mysqli_error($conn) . "'</script>;";
+         echo mysqli_error($conn);
+      }
+   }
 
    if (isset($_POST["update-surat"])) {
       $id = $_GET['id'];
-      if (updateSurat($_POST) == 1) {
+      if (updateSurat($_POST) > 0) {
          echo
-            "<script>
+         "<script>
                alert('Surat Berhasil Diupdate');
                document.location.href = 'surat?id=" . $id . "';
             </script>";
@@ -37,22 +37,22 @@ function suratNotice()
    }
 }
 
-// if (isset($_GET["delete"])) {
-//    $id = $_GET['delete'];
-//    $npm = $_SESSION["npm"];
-//    if (delete_surat($npm, $id) > 0) {
-//       echo
-//          "<script>
-//             alert('Surat Berhasil Dihapus');
-//             document.location.href='home';
-//          </script>";
-//    } else {
-//       echo
-//          "<script>
-//             alert('Surat Tidak Berhasil Terhapus : Error " . mysqli_error($conn) . "');
-//          </sciprt>";
-//    }
-// }
+if (isset($_GET["delete"])) {
+   $id = $_GET['delete'];
+   $npm = $_SESSION["npm"];
+   if (delete_surat($npm, $id) > 0) {
+      echo
+      "<script>
+            alert('Surat Berhasil Dihapus');
+            document.location.href='home';
+         </script>";
+   } else {
+      echo
+      "<script>
+            alert('Surat Tidak Berhasil Terhapus : Error " . mysqli_error($conn) . "');
+         </sciprt>";
+   }
+}
 ?>
 
 <!doctype html>

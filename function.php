@@ -142,28 +142,6 @@ function updateSurat($data)
    $perusahaan = htmlspecialchars($data['perusahaan']);
    $perihal_lengkap = htmlspecialchars($data['perihal_lengkap']);
 
-   if ($kategori == 'Magang') {
-      $no_surat = "MG/" . htmlspecialchars($data['id']);
-   } else if ($kategori == 'Studi') {
-      $no_surat = "STD/" . htmlspecialchars($data['id']);
-   }
-
-   // $result = mysqli_query($conn, "SELECT id FROM surat WHERE id = '$id'");
-   // if (mysqli_fetch_assoc($result)) {
-   //    echo "<script>
-   //             alert('Surat sudah Terdaftar');
-   //          </script>";
-   //    return false;
-   // }
-
-   // $row_no_surat = mysqli_query($conn, "SELECT no_surat FROM surat WHERE no_surat = '$no_surat'");
-   // if ($row_no_surat == $no_surat) {
-   //    echo "<script>
-   //             alert('Surat sudah terdaftar');
-   //          </script>";
-   //    return false;
-   // }
-
    $query = "UPDATE surat SET kategori = '$kategori', judul_surat = '$judul_surat', perusahaan = '$perusahaan', perihal_lengkap = '$perihal_lengkap' WHERE npm = '$npm' && id = '$id';";
 
    mysqli_query($conn, $query);
@@ -215,7 +193,7 @@ function upload()
 
    if ($error === 4) {
       echo
-         "<script>
+      "<script>
    		alert('Pilih gambar terlebih dahulu');
    	</script>";
       return false;
@@ -226,7 +204,7 @@ function upload()
    $ekstensiGambar = strtolower(end($ekstensiGambar));
    if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
       echo
-         "<script>
+      "<script>
 			alert('Yang diupload harus gambar');
 		</script>";
       return false;
@@ -234,7 +212,7 @@ function upload()
 
    if ($ukuranFile > 5000000) {
       echo
-         "<script>
+      "<script>
 			alert('File gambar minimal berukuran 4096kb');
 		</script>";
       return false;
@@ -266,7 +244,7 @@ function updatePassword($data)
    if (password_verify($password_lama, $password_lama_hash)) {
       if ($password_baru !== $konfirm_password_baru) {
          echo
-            "<script>
+         "<script>
                alert('Konfirmasi password Tidak Sesuai');
             </script>";
          return false;
@@ -275,7 +253,7 @@ function updatePassword($data)
       }
    } else {
       echo
-         "<script>
+      "<script>
             alert('Password lama salah');
          </script>";
       return false;
