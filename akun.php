@@ -10,7 +10,7 @@ function mahasiswaUpdated()
    if (isset($_POST["update_mhs"])) {
       if (update($_POST) == 1) {
          echo
-            "<script>
+         "<script>
                alert('Data Mahasiswa Terupdate');
                document.location.href= 'akun';
             </script>";
@@ -26,7 +26,7 @@ function passwordUpdated()
    if (isset($_POST['update_password'])) {
       if (updatePassword($_POST) > 0) {
          echo
-            "<script>
+         "<script>
             alert('Password Terupdate');
             document.location.href= 'akun';
          </script>";
@@ -147,7 +147,7 @@ function passwordUpdated()
                      <div class="col-md-9">
                         <label for="jurusan" class="form-label">Jurusan</label>
                         <select id="jurusan" name="jurusan" class="form-control">
-                           <option value="Teknik Infromatika">Teknik Informatika</option>
+                           <option value="Teknik Informatika">Teknik Informatika</option>
                            <option value="Sistem Informasi">Sistem Informasi</option>
                         </select>
                      </div>

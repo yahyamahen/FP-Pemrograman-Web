@@ -1,4 +1,10 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once "../vendor/autoload.php";
+
 function connection()
 {
    $dbServer = 'localhost';
@@ -77,6 +83,7 @@ function validasiSurat($data)
    $perusahaan = htmlspecialchars($data['perusahaan']);
    $status_surat = htmlspecialchars($data['status_surat']);
 
+   // exit;
    if ($status_surat == 'Tervalidasi') {
       if ($kategori == 'Magang') {
          $no_surat = "MG.$id/3/EKS/X/2020";
@@ -90,7 +97,47 @@ function validasiSurat($data)
    $query = "UPDATE surat SET status_surat = '$status_surat', no_surat = '$no_surat' WHERE npm = '$npm' && id = '$id';";
    mysqli_query($conn, $query);
    return mysqli_affected_rows($conn);
-   // exit;
+}
+
+function kirimSurat($data)
+{
+   global $conn;
+   $id = htmlspecialchars($data["id"]);
+   $npm = htmlspecialchars($data["npm"]);
+   $nama_mhs = htmlspecialchars($data["nama_mhs"]);
+   $email = htmlspecialchars($data["email"]);
+   $kategori = htmlspecialchars($data["kategori"]);
+   $judul_surat = htmlspecialchars($data['judul_surat']);
+   $perusahaan = htmlspecialchars($data['perusahaan']);
+   $status_surat = htmlspecialchars($data['status_surat']);
+
+   $mail = new PHPMailer;
+   $mail->isSMTP();
+   $mail->Host = "tls://smtp.gmail.com";
+   $mail->SMTPAuth = true;
+   $mail->Username = "kiky.mahendra21@gmail.com";
+   $mail->Password = "It'sallconnected1";
+   $mail->addAttachment("../images/" . $npm . "/surat/" .  $npm . "_valid"  . ".pdf");
+   $mail->SMTPSecure = "ssl";
+   $mail->Port = 587;
+   $mail->From = "kiky.mahendra21@gmail.com";
+   $mail->FromName = "Rizqi Yahya Mahendra";
+   $mail->addAddress($email, $nama_mhs);
+   $mail->isHTML(true);
+   $mail->Subject = $judul_surat;
+   $mail->Body    = "Surat $kategori $status_surat dari SiPesan";
+   $mail->AltBody = "Termakasih, semoga beruntung di $perusahaan";
+
+   if (!$mail->send()) {
+      echo "
+         <script> 
+            alert('Mailer Error: " . $mail->ErrorInfo . "');
+         </script>";
+   } else {
+      "<script>
+         alert('Message sent successfully...');
+      </script>";
+   }
 }
 
 function delete_surat($npm, $id)
@@ -99,6 +146,7 @@ function delete_surat($npm, $id)
    $query = "DELETE FROM surat WHERE npm = '$npm' && id = '$id';";
    mysqli_query($conn, $query);
 
+   echo mysqli_error($conn);
    return mysqli_affected_rows($conn);
 }
 
@@ -234,8 +282,11 @@ function updatePassword($data)
 function delete_mhs($npm)
 {
    global $conn;
+   $query = "DELETE FROM surat WHERE npm = '$npm';";
+   mysqli_query($conn, $query);
    $query = "DELETE FROM mahasiswa WHERE npm = '$npm';";
    mysqli_query($conn, $query);
 
+   echo mysqli_error($conn);
    return mysqli_affected_rows($conn);
 }

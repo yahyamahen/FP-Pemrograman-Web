@@ -140,6 +140,38 @@ body .content-surat .body-surat .isi-surat {
   margin: 0mm;
 }
 
+body .margin-surat {
+  background-color: white;
+  padding: 2em 3em 2em 3em;
+}
+
+body .margin-surat .header h4 {
+  font-size: 18px;
+}
+
+body .margin-surat .header h2 {
+  font-size: 25px;
+}
+
+body .margin-surat .header p {
+  font-size: 12px;
+  margin-bottom: 0.1em;
+  line-height: 17px;
+}
+
+body .margin-surat .body-surat {
+  padding: 0em 3em 0em 3em;
+}
+
+body .margin-surat .body-surat .tujuan-surat p {
+  font-size: 1.1em;
+  margin-bottom: 0em;
+}
+
+body .margin-surat .body-surat .isi-surat {
+  font-size: 1em;
+}
+
 body {
   background-color: #dfdfdf;
 }

@@ -90,7 +90,7 @@ if (isset($_GET["delete"])) {
                         <p style="line-height: 1em; color:red;" align="center"><strong><?= $data['status_surat'] ?></strong></p>
                         <div>
                            <a class="badge badge-pill badge-success ml-1 edit-surat-btn" data-toggle="modal" data-target="#formModal-update" href="" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>" style="font-size:1em">Update</a>
-                           <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" onClick="window.print()">Cetak</a>
+                           <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" href="file_surat?id=<?= $_GET['id'] ?>">Cetak</a>
                            <!-- <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="surat?delete=<?= $data['id'] ?>">Hapus</a> -->
                         </div>
                      <?php else : ?>
@@ -98,8 +98,7 @@ if (isset($_GET["delete"])) {
                         <p style="font-size: 0.9em; color:black; margin-top:-1.4em;"><?= $data['no_surat'] ?></p>
                         </p>
                         <div>
-                           <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" onClick="window.print()">Cetak</a>
-                           <!-- <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="surat?delete=<?= $data['id'] ?>">Hapus</a> -->
+                           <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" href="file_surat?id=<?= $_GET['id'] ?>">Cetak</a>
                         </div>
                      <?php endif; ?>
                   </div>
@@ -190,7 +189,7 @@ if (isset($_GET["delete"])) {
                         <p style="line-height: 1em; color:red;" align="center"><strong><?= $data['status_surat'] ?></strong></p>
                         <div>
                            <a class="badge badge-pill badge-success ml-1 edit-surat-btn" data-toggle="modal" data-target="#formModal-update" href="" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>" style="font-size:1em">Update</a>
-                           <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" onClick="window.print()">Cetak</a>
+                           <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" href="file_surat?id=<?= $_GET['id'] ?>">Cetak</a>
                            <!-- <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="surat?delete=<?= $data['id'] ?>">Hapus</a> -->
                         </div>
                      <?php else : ?>
@@ -198,7 +197,7 @@ if (isset($_GET["delete"])) {
                         <p style="font-size: 0.9em; color:black; margin-top:-1.4em;"><?= $data['no_surat'] ?></p>
                         </p>
                         <div>
-                           <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" onClick="window.print()">Cetak</a>
+                           <a class="badge badge-pill badge-info ml-1" style="font-size:1em" target="_blank" href="file_surat?id=<?= $_GET['id'] ?>">Cetak</a>
                            <!-- <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="surat?delete=<?= $data['id'] ?>">Hapus</a> -->
                         </div>
                      <?php endif; ?>

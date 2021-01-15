@@ -294,6 +294,7 @@ if (isset($_GET["delete"])) {
 
    <script src="js/js/jquery-3.5.1.js"></script>
    <script src="js/js/jquery-3.5.1.min.js"></script>
+   <script src="js/js/popper.min.js"></script>
    <script src="js/js/bootstrap.js"></script>
    <script src="js/js/bootstrap.min.js"></script>
    <!-- <script src="js/js/bootstrap.bundle.js"></script> -->

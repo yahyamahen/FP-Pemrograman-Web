@@ -33,11 +33,6 @@ if (isset($_GET['kategori'])) {
    }
 }
 
-// if (isset($_GET['id'])) {
-//    $id = $_GET['id'];
-//    $surat = read("SELECT * FROM surat WHERE id = '$id'");
-// }
-
 function suratNotice()
 {
    global $conn;
@@ -45,10 +40,10 @@ function suratNotice()
       var_dump($_POST);
       if (inputSurat($_POST) == 1) {
          echo
-         "<script>
+         "<script?>
             alert('Surat Berhasil Ditambahkan');
             document.location.href = 'home';
-         </script>";
+         </script?>";
       } else {
          echo "<script> alert('Error :  " . mysqli_error($conn) . "'</script>;";
          echo mysqli_error($conn);
@@ -96,6 +91,14 @@ if (isset($_GET["delete"])) {
             alert('Surat Tidak Berhasil Terhapus : Error " . mysqli_error($conn) . "');
          </sciprt>";
    }
+}
+
+if (isset($_POST['kirim_surat'])) {
+   kirimSurat($_POST);
+   echo
+   "<script>
+      alert('Surat terkirim pada email : " . $_POST['email'] . "');
+   </script>";
 }
 ?>
 
@@ -179,9 +182,22 @@ if (isset($_GET["delete"])) {
                                  </td>
                               <?php endif; ?>
                               <td width="10%" class=" text-center">
-                                 <a class="badge badge-pill badge-warning ml-1 tampilModalValidasi" href="detail_surat?id=<?= $data['id'] ?>" data-toggle="modal" data-target="#formModal-validasi" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-nama_mhs="<?= $data['nama_mhs'] ?>" data-email="<?= $data['email'] ?>" data-judul_surat=" <?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-status_surat="<?= $data['status_surat'] ?>" data-no_surat="<?= $data['no_surat'] ?>">Status</a>
+                                 <!-- <a class="badge badge-pill badge-warning ml-1 tampilModalValidasi" href="detail_surat?id=<?= $data['id'] ?>" data-toggle="modal" data-target="#formModal-validasi" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-nama_mhs="<?= $data['nama_mhs'] ?>" data-email="<?= $data['email'] ?>" data-judul_surat=" <?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-status_surat="<?= $data['status_surat'] ?>" data-no_surat="<?= $data['no_surat'] ?>">Status</a> -->
+                                 <?php if ($data['status_surat'] == 'Tervalidasi') : ?>
+                                    <form action="" method="post">
+                                       <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                       <input type="hidden" name="npm" value="<?= $data['npm'] ?>">
+                                       <input type="hidden" name="nama_mhs" value="<?= $data['nama_mhs'] ?>">
+                                       <input type="hidden" name="email" value="<?= $data['email'] ?>">
+                                       <input type="hidden" name="kategori" value="<?= $data['kategori'] ?>">
+                                       <input type="hidden" name="judul_surat" value="<?= $data['judul_surat'] ?>">
+                                       <input type="hidden" name="perusahaan" value="<?= $data['perusahaan'] ?>">
+                                       <input type="hidden" name="status_surat" value="<?= $data['status_surat'] ?>">
+                                       <button type="submit" name="kirim_surat" class="btn badge badge-pill badge-primary ml-1" style="font-size:0.75em">Kirim</button>
+                                    </form>
+                                 <?php endif; ?>
                                  <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="home?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
-                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>">Hapus</a>
+                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>&npm=<?= $data['npm'] ?>">Hapus</a>
                               </td>
                            </tr>
                         <?php $i++;
@@ -191,7 +207,7 @@ if (isset($_GET["delete"])) {
                         foreach ($surat as $data) : ?>
                            <tr>
                               <th><?= $i; ?></th>
-                              <td width="16%" align="center"><a class="card-link" style="color: black; font-weight:500;" href="detail_mahasiswa?npm=<?= $data['npm'] ?>"><?= $data['npm'] ?></a><strong></strong> <br>
+                              <td width=" 16%" align="center"><a class="card-link" style="color: black; font-weight:500;" href="detail_mahasiswa?npm=<?= $data['npm'] ?>"><?= $data['npm'] ?></a><strong></strong> <br>
                                  <p style="font-size: 0.8em; line-height:1.4em;"><?= $data['nama_mhs'] ?></p>
                               </td>
                               <td><a class="card-link" style="font-weight: 500;" href="detail_surat?id=<?= $data['id'] ?>"><?= $data['judul_surat'] ?></a></td>
@@ -205,9 +221,22 @@ if (isset($_GET["delete"])) {
                                  </td>
                               <?php endif; ?>
                               <td width="10%" class=" text-center">
-                                 <a class="badge badge-pill badge-warning ml-1 tampilModalValidasi" href="detail_surat?id=<?= $data['id'] ?>" data-toggle="modal" data-target="#formModal-validasi" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-email="<?= $data['email'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-status_surat="<?= $data['status_surat'] ?>" data-no_surat="<?= $data['no_surat'] ?>">Status</a>
+                                 <!-- <a class="badge badge-pill badge-warning ml-1 tampilModalValidasi" href="detail_surat?id=<?= $data['id'] ?>" data-toggle="modal" data-target="#formModal-validasi" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-email="<?= $data['email'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-status_surat="<?= $data['status_surat'] ?>" data-no_surat="<?= $data['no_surat'] ?>">Status</a> -->
+                                 <?php if ($data['status_surat'] == 'Tervalidasi') : ?>
+                                    <form action="" method="post">
+                                       <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                                       <input type="hidden" name="npm" value="<?= $data['npm'] ?>">
+                                       <input type="hidden" name="nama_mhs" value="<?= $data['nama_mhs'] ?>">
+                                       <input type="hidden" name="email" value="<?= $data['email'] ?>">
+                                       <input type="hidden" name="kategori" value="<?= $data['kategori'] ?>">
+                                       <input type="hidden" name="judul_surat" value="<?= $data['judul_surat'] ?>">
+                                       <input type="hidden" name="perusahaan" value="<?= $data['perusahaan'] ?>">
+                                       <input type="hidden" name="status_surat" value="<?= $data['status_surat'] ?>">
+                                       <button type="submit" name="kirim_surat" class="btn badge badge-pill badge-primary ml-1" style="font-size:0.75em">Kirim</button>
+                                    </form>
+                                 <?php endif; ?>
                                  <a class="badge badge-pill badge-success ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal-input" href="home?update=<?= $data['id'] ?>" data-id="<?= $data['id'] ?>" data-npm="<?= $data['npm'] ?>" data-judul_surat="<?= $data['judul_surat'] ?>" data-kategori="<?= $data['kategori'] ?>" data-perusahaan="<?= $data['perusahaan'] ?>" data-perihal_lengkap="<?= $data['perihal_lengkap'] ?>">Update</a>
-                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>">Hapus</a>
+                                 <a class="badge badge-pill badge-danger ml-1" onclick="return confirm('Anda Yakin?');" href="home?delete=<?= $data['id'] ?>&npm=<?= $data['npm'] ?>">Hapus</a>
                               </td>
                            </tr>
                         <?php $i++;
@@ -221,7 +250,7 @@ if (isset($_GET["delete"])) {
    </div>
 
    <!-- Modal Update -->
-   <div class="modal fade" id="formModal-input" tabhome="-1" aria-labelledby="judulModal" aria-hidden="true">
+   <div class=" modal fade" id="formModal-input" tabhome="-1" aria-labelledby="judulModal" aria-hidden="true">
       <div class="modal-dialog modal-lg">
          <div class="modal-content">
             <div class="modal-header">

@@ -32,9 +32,9 @@ if (isset($_POST['login'])) {
       //cek password
       $row = mysqli_fetch_assoc($result);
 
-      echo "<br>" . $password;
-      echo "<br>";
-      var_dump($row);
+      // echo "<br>" . $password;
+      // echo "<br>";
+      // var_dump($row);
 
       if (password_verify($password, $row['pass'])) {
          // set session

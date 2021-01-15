@@ -34,7 +34,7 @@ function mahasiswaUpdated()
    if (isset($_POST["update_mhs"])) {
       if (update($_POST) == 1) {
          echo
-            "<script>
+         "<script>
                alert('Data Mahasiswa Terupdate');
                document.location.href= 'mahasiswa';
             </script>";
@@ -48,13 +48,13 @@ if (isset($_GET["delete"])) {
    $npm = $_GET['delete'];
    if (delete_mhs($npm) > 0) {
       echo
-         "<script>
+      "<script>
             alert('Mahasiswa Berhasil Dihapus');
             document.location.href='mahasiswa';
          </script>";
    } else {
       echo
-         "<script>
+      "<script>
             alert('Surat Tidak Berhasil Terhapus : Error " . mysqli_error($conn) . "');
          </sciprt>";
    }
