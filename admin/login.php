@@ -23,11 +23,13 @@ if (isset($_POST["login"])) {
 
    $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username';");
 
+
    // cek username
    if (mysqli_num_rows($result) === 1) {
       //cek password
       $row = mysqli_fetch_assoc($result);
-      if (password_verify($password, $row["password"])) {
+      echo var_dump($row);
+      if (password_verify($password, $row["PASSWORD"])) {
          // set session
          $_SESSION['admin'] = true;
          $_SESSION['username'] = $row['username'];
